@@ -6,18 +6,19 @@ import com.tmdhoon.todolist.SignUp.SignUpRequest;
 import com.tmdhoon.todolist.SignUp.SignUpResponse;
 
 import retrofit2.Call;
+import retrofit2.Callback;
 import retrofit2.http.Body;
 import retrofit2.http.POST;
 
 public interface ServerApi {
 
-    @POST("/users/signin")
-    Call<SignInResponse> Signin(
+    @POST("users/signin")
+    Call<SignInResponse> signIn(
             @Body SignInRequest signInRequest
     );
 
-    @POST("/users/signup")
-    Call<SignUpResponse> Signup(
+    @POST("users/signup")
+    Call<SignUpResponse> signUp(
             @Body SignUpRequest signUpRequest
     );
 

@@ -1,31 +1,47 @@
 package com.tmdhoon.todolist.SignUp;
 
 public class SignUpRequest {
-    private String userId;
-    private int userAge;
     private String userName;
+    private int userAge;
+    private String userId;
     private String userPw;
 
-    public SignUpRequest(String userId, int userAge, String userName, String userPw) {
-        this.userId = userId;
-        this.userAge = userAge;
+    public SignUpRequest(String userName, int userAge, String userId, String userPw) {
         this.userName = userName;
+        this.userAge = userAge;
+        this.userId = userId;
         this.userPw = userPw;
-    }
-
-    public String getUserId() {
-        return userId;
-    }
-
-    public int getUserAge() {
-        return userAge;
     }
 
     public String getUserName() {
         return userName;
     }
 
+    public void setUserName(String userName) {
+        this.userName = userName;
+    }
+
+    public int getUserAge() {
+        return userAge;
+    }
+
+    public void setUserAge(int userAge) {
+        this.userAge = userAge;
+    }
+
+    public String getUserId() {
+        return userId;
+    }
+
+    public void setUserId(String userId) {
+        this.userId = userId;
+    }
+
     public String getUserPw() {
         return userPw;
+    }
+
+    public void setUserPw(String userPw) {
+        this.userPw = userPw;
     }
 }

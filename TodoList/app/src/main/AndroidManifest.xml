@@ -10,7 +10,8 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.TodoList.Splash">
+        android:theme="@style/Theme.TodoList.Splash"
+        android:usesCleartextTraffic="true">
         <activity
             android:name=".Lobby.SignUpActivity"
             android:exported="false" />

@@ -4,11 +4,14 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.tmdhoon.todolist.Api.ApiProvider;
 import com.tmdhoon.todolist.Api.ServerApi;
+import com.tmdhoon.todolist.R;
 import com.tmdhoon.todolist.SignIn.SignInRequest;
 import com.tmdhoon.todolist.SignIn.SignInResponse;
 import com.tmdhoon.todolist.databinding.ActivitySigninBinding;
@@ -40,12 +43,13 @@ public class SignInActivity extends AppCompatActivity {
         binding.btLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                SignIn();
+                Log.e("Test", "onClick");
+                signIn();
             }
         });
     }
 
-    private void SignIn(){
+    private void signIn(){
         String userId = binding.etId.getText().toString();
         String userPw = binding.etPw.getText().toString();
 
@@ -54,24 +58,26 @@ public class SignInActivity extends AppCompatActivity {
         }else if(userPw.length() == 0){
             Toast.makeText(SignInActivity.this, "비밀번호를 입력해주세요", Toast.LENGTH_SHORT).show();
         }else{
-            SignInResponse();
+            signInResponse();
         }
     }
 
-    public void SignInResponse(){
+    public void signInResponse(){
         String userId = binding.etId.getText().toString();
         String userPw = binding.etPw.getText().toString();
 
         SignInRequest signInRequest = new SignInRequest(userId, userPw);
         ServerApi serverApi = ApiProvider.getInstance().create(ServerApi.class);
 
-        serverApi.Signin(signInRequest).enqueue(new Callback<SignInResponse>() {
+        serverApi.signIn(signInRequest).enqueue(new Callback<SignInResponse>() {
             @Override
             public void onResponse(Call<SignInResponse> call, Response<SignInResponse> response) {
-                if(response.code() == 200){
+                if(response.isSuccessful()){
                     Toast.makeText(SignInActivity.this, "로그인에 성공했습니다!", Toast.LENGTH_SHORT).show();
                     Intent intent = new Intent(getApplicationContext(), MainActivity.class);
                     startActivity(intent);
+                }else if(response.code() == 404){
+                    Toast.makeText(SignInActivity.this, "아이디를 확인해주세요", Toast.LENGTH_SHORT).show();
                 }
             }
 

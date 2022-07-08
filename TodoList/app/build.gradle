@@ -4,12 +4,12 @@ plugins {
 }
 
 android {
-    compileSdk 32
+    compileSdk 31
 
     defaultConfig {
         applicationId "com.tmdhoon.todolist"
-        minSdk 31
-        targetSdk 32
+        minSdk 28
+        targetSdk 31
         versionCode 1
         versionName "1.0"
 
@@ -26,17 +26,17 @@ android {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
-    buildFeatures{
-        viewBinding = true
+    viewBinding {
+        enabled = true
     }
 }
 
 dependencies {
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
-    implementation "com.squareup.retrofit2:retrofit:2.9.0"          // Retrofit2
-    implementation "com.squareup.retrofit2:converter-gson:2.9.0"    // Retrofit2 Gson converter     // okhttp3
-    implementation 'com.github.bumptech.glide:glide:4.13.0'                     // Glide
-    annotationProcessor 'com.github.bumptech.glide:compiler:4.13.0'             // Glidecompiler
+    implementation "com.squareup.retrofit2:retrofit:2.9.0"
+    implementation "com.squareup.retrofit2:converter-gson:2.9.0"
+    implementation 'com.github.bumptech.glide:glide:4.13.0'                     
+    annotationProcessor 'com.github.bumptech.glide:compiler:4.13.0'
 
     implementation 'androidx.appcompat:appcompat:1.4.2'
     implementation 'com.google.android.material:material:1.6.1'

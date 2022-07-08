@@ -1,26 +1,22 @@
 package com.tmdhoon.todolist.SignUp;
 
 public class SignUpResponse {
-    private String userId;
-    private int userAge;
-    private String userName;
-    private String userPw;
+    private String message;
+    private String name;
 
-    public String getUserId() {
-        return userId;
+    public String getMessage() {
+        return message;
     }
 
-    public int getUserAge() {
-        return userAge;
+    public void setMessage(String message) {
+        this.message = message;
     }
 
-    public String getUserName() {
-        return userName;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public String getUserPw() {
-        return userPw;
+    public String getName() {
+        return name;
     }
-
-
 }

@@ -7,7 +7,6 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-
 import com.tmdhoon.todolist.R;
 
 public class MypageFragment extends Fragment {
@@ -17,5 +16,6 @@ public class MypageFragment extends Fragment {
        ViewGroup rootView = (ViewGroup)inflater.inflate(R.layout.fragment_mypage, containter, false);
 
        return rootView;
+
    }
 }

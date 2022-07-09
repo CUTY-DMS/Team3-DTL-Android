@@ -1,4 +1,4 @@
-package com.tmdhoon.todolist.SignUp;
+package com.tmdhoon.todolist.Response;
 
 public class SignUpResponse {
     private String message;

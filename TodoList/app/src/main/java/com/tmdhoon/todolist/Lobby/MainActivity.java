@@ -8,13 +8,12 @@ import androidx.fragment.app.FragmentTransaction;
 import android.os.Bundle;
 import android.view.MenuItem;
 
-import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
 import com.tmdhoon.todolist.R;
 import com.tmdhoon.todolist.databinding.ActivityMainBinding;
 import com.tmdhoon.todolist.fragment.HomeFragment;
 import com.tmdhoon.todolist.fragment.MypageFragment;
-import com.tmdhoon.todolist.fragment.SearchFragment;
+import com.tmdhoon.todolist.fragment.PostFragment;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -23,7 +22,7 @@ public class MainActivity extends AppCompatActivity {
     private FragmentManager fragmentManager = getSupportFragmentManager();                          // 프래그먼트를 교체하거나 추가, 삭제 하는데 사용되는 클래스
 
     private HomeFragment homeFragment = new HomeFragment();                                         // 홈 프래그먼트
-    private SearchFragment searchFragment = new SearchFragment();                                   // 검색 프래그먼트
+    private PostFragment postFragment = new PostFragment();                                   // 검색 프래그먼트
     private MypageFragment mypageFragment = new MypageFragment();                                   // 마이페이지 프래그먼트
 
     @Override
@@ -49,8 +48,8 @@ public class MainActivity extends AppCompatActivity {
                         transaction.replace(R.id.framelayout, homeFragment).commitAllowingStateLoss();
                         break;
 
-                    case R.id.menu_search:
-                        transaction.replace(R.id.framelayout, searchFragment).commitAllowingStateLoss();
+                    case R.id.menu_post:
+                        transaction.replace(R.id.framelayout, postFragment).commitAllowingStateLoss();
                         break;
 
                     case R.id.menu_mypage:

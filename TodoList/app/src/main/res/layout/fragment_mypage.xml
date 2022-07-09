@@ -7,7 +7,7 @@
     tools:context=".fragment.MypageFragment">
 
     <TextView
-        android:id="@+id/tvName"
+        android:id="@+id/tvuser_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Name"
@@ -18,7 +18,18 @@
         app:layout_constraintRight_toRightOf="parent" />
 
     <TextView
-        android:id="@+id/tvAge"
+        android:id="@+id/tvuser_id"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Id"
+        android:textSize="30sp"
+        android:layout_marginTop="40dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tvuser_name"/>
+
+    <TextView
+        android:id="@+id/tvuser_age"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Age"
@@ -26,6 +37,17 @@
         android:layout_marginTop="40dp"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tvName"/>
+        app:layout_constraintTop_toBottomOf="@id/tvuser_id"/>
+
+    <TextView
+        android:id="@+id/tvtoken"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="token"
+        android:textSize="20sp"
+        android:layout_marginTop="40dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tvuser_age"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

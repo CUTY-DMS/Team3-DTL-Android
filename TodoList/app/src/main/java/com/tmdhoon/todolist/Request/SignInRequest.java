@@ -1,4 +1,4 @@
-package com.tmdhoon.todolist.SignIn;
+package com.tmdhoon.todolist.Request;
 
 public class SignInRequest {
 

@@ -1,4 +1,4 @@
-package com.tmdhoon.todolist.SignUp;
+package com.tmdhoon.todolist.Request;
 
 public class SignUpRequest {
     private String userName;

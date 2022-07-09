@@ -12,9 +12,12 @@ import android.widget.Toast;
 import com.tmdhoon.todolist.Api.ApiProvider;
 import com.tmdhoon.todolist.Api.ServerApi;
 import com.tmdhoon.todolist.R;
-import com.tmdhoon.todolist.SignIn.SignInRequest;
-import com.tmdhoon.todolist.SignIn.SignInResponse;
+import com.tmdhoon.todolist.Request.SignInRequest;
+import com.tmdhoon.todolist.Response.SignInResponse;
 import com.tmdhoon.todolist.databinding.ActivitySigninBinding;
+import com.tmdhoon.todolist.databinding.FragmentMypageBinding;
+import com.tmdhoon.todolist.databinding.FragmentPostBinding;
+import com.tmdhoon.todolist.fragment.PostFragment;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -24,6 +27,9 @@ import retrofit2.Response;
 public class SignInActivity extends AppCompatActivity {
 
     private ActivitySigninBinding binding;
+
+    public static String token;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,21 +68,26 @@ public class SignInActivity extends AppCompatActivity {
         }
     }
 
-    public void signInResponse(){
+    public void signInResponse() {
         String userId = binding.etId.getText().toString();
         String userPw = binding.etPw.getText().toString();
 
         SignInRequest signInRequest = new SignInRequest(userId, userPw);
+
         ServerApi serverApi = ApiProvider.getInstance().create(ServerApi.class);
 
         serverApi.signIn(signInRequest).enqueue(new Callback<SignInResponse>() {
             @Override
             public void onResponse(Call<SignInResponse> call, Response<SignInResponse> response) {
-                if(response.isSuccessful()){
+                if (response.isSuccessful()) {
                     Toast.makeText(SignInActivity.this, "로그인에 성공했습니다!", Toast.LENGTH_SHORT).show();
+
+                    token = response.body().getToken();
+
                     Intent intent = new Intent(getApplicationContext(), MainActivity.class);
                     startActivity(intent);
-                }else if(response.code() == 404){
+
+                } else if (response.code() == 404) {
                     Toast.makeText(SignInActivity.this, "아이디를 확인해주세요", Toast.LENGTH_SHORT).show();
                 }
             }
@@ -87,5 +98,4 @@ public class SignInActivity extends AppCompatActivity {
             }
         });
     }
-
 }

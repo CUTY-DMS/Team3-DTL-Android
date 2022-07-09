@@ -7,9 +7,9 @@
         android:icon="@drawable/ic_baseline_home_24"/>
 
     <item
-        android:id="@+id/menu_search"
-        android:title="검색"
-        android:icon="@drawable/ic_baseline_search_24"/>
+        android:id="@+id/menu_post"
+        android:title="작성"
+        android:icon="@drawable/ic_baseline_mode_24"/>
 
     <item
         android:id="@+id/menu_mypage"

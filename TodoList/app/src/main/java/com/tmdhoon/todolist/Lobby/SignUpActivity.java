@@ -1,7 +1,6 @@
 package com.tmdhoon.todolist.Lobby;
 
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -13,8 +12,8 @@ import android.widget.Toast;
 
 import com.tmdhoon.todolist.Api.ApiProvider;
 import com.tmdhoon.todolist.Api.ServerApi;
-import com.tmdhoon.todolist.SignUp.SignUpRequest;
-import com.tmdhoon.todolist.SignUp.SignUpResponse;
+import com.tmdhoon.todolist.Request.SignUpRequest;
+import com.tmdhoon.todolist.Response.SignUpResponse;
 import com.tmdhoon.todolist.R;
 import com.tmdhoon.todolist.databinding.ActivitySignupBinding;
 

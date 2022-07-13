@@ -3,6 +3,7 @@ package com.tmdhoon.todolist.Api;
 import com.tmdhoon.todolist.Request.PostRequest;
 import com.tmdhoon.todolist.Request.SignInRequest;
 import com.tmdhoon.todolist.Response.MainResponse;
+import com.tmdhoon.todolist.Response.MyResponse;
 import com.tmdhoon.todolist.Response.SignInResponse;
 import com.tmdhoon.todolist.Request.SignUpRequest;
 import com.tmdhoon.todolist.Response.SignUpResponse;
@@ -35,6 +36,11 @@ public interface ServerApi {
 
     @GET("post/main")
     Call<List<MainResponse>> main(
+            @Header("AccessToken") String token
+    );
+
+    @GET("users/my")
+    Call<MyResponse> my(
             @Header("AccessToken") String token
     );
 

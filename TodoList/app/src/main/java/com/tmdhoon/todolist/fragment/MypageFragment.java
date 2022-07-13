@@ -17,6 +17,7 @@ import com.tmdhoon.todolist.Api.ApiProvider;
 import com.tmdhoon.todolist.Api.ServerApi;
 import com.tmdhoon.todolist.Lobby.SignInActivity;
 import com.tmdhoon.todolist.R;
+import com.tmdhoon.todolist.Response.MyResponse;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -38,6 +39,24 @@ public class MypageFragment extends Fragment {
        username = rootView.findViewById(R.id.tvuser_name);
        userid = rootView.findViewById(R.id.tvuser_id);
        userage = rootView.findViewById(R.id.tvuser_age);
+
+       ServerApi serverApi = ApiProvider.getInstance().create(ServerApi.class);
+
+      serverApi.my(SignInActivity.AccessToken).enqueue(new Callback<MyResponse>() {
+          @Override
+          public void onResponse(Call<MyResponse> call, Response<MyResponse> response) {
+              if(response.isSuccessful()){
+                  username.setText(response.body().getUser_name());
+                  userid.setText(response.body().getUser_id());
+                  userage.setText(response.body().getUser_age());
+              }
+          }
+
+          @Override
+          public void onFailure(Call<MyResponse> call, Throwable t) {
+
+          }
+      });
 
        return rootView;
 

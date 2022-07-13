@@ -44,14 +44,6 @@ public class SignInActivity extends AppCompatActivity {
         user_age = (TextView) findViewById(R.id.tvuser_age);
         user_id = (TextView) findViewById(R.id.tvuser_id);
 
-        binding.admin.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(getApplicationContext(), MainActivity.class);
-                startActivity(intent);
-            }
-        });
-
         binding.tvLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

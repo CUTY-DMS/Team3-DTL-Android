@@ -1,5 +1,6 @@
 package com.tmdhoon.todolist.fragment;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -48,14 +49,14 @@ public class HomeFragment extends Fragment{
 
         recyclerView.setAdapter(todoAdapter);
 
-        fetchPosts();
+        load();
 
 
 
         return view;
     }
 
-    private void fetchPosts(){
+    private void load(){
         ServerApi serverApi = ApiProvider.getInstance().create(ServerApi.class);
 
         serverApi.main(SignInActivity.AccessToken).enqueue(new Callback<List<MainResponse>>() {

@@ -2,6 +2,7 @@ package com.tmdhoon.todolist.Recyclerview;
 
 import android.content.Context;
 import android.content.Intent;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,15 +12,16 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.FragmentActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.tmdhoon.todolist.Lobby.DetailActivity;
 import com.tmdhoon.todolist.R;
 import com.tmdhoon.todolist.Response.MainResponse;
+import com.tmdhoon.todolist.fragment.HomeFragment;
 
 import java.util.List;
 
 public class TodoAdapter extends RecyclerView.Adapter<TodoAdapter.TodoViewHolder>{
 
     private List<MainResponse> list;
-    private Context context;
 
     public class TodoViewHolder extends RecyclerView.ViewHolder {
 
@@ -61,7 +63,15 @@ public class TodoAdapter extends RecyclerView.Adapter<TodoAdapter.TodoViewHolder
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(context, )
+                Log.d("TodoAdapter", "onClick");
+                Intent intent = new Intent(view.getContext(), DetailActivity.class);
+
+                intent.putExtra("title", list.get(position).getTitle());
+                intent.putExtra("content", list.get(position).getContents());
+                intent.putExtra("member_id", list.get(position).getMember_id());
+                intent.putExtra("created_at", list.get(position).getCreated_at());
+
+                view.getContext().startActivity(intent);
             }
         });
 

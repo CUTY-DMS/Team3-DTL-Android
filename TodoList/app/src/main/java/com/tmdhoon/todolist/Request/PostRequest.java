@@ -3,11 +3,11 @@ package com.tmdhoon.todolist.Request;
 public class PostRequest {
 
     private String title;
-    private String contents;
+    private String content;
 
-    public PostRequest(String title, String contents) {
+    public PostRequest(String title, String content) {
         this.title = title;
-        this.contents = contents;
+        this.content = content;
     }
 
     public String getTitle() {
@@ -15,7 +15,7 @@ public class PostRequest {
     }
 
     public String getContents() {
-        return contents;
+        return content;
     }
 
 }

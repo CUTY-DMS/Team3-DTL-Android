@@ -15,10 +15,6 @@ import com.tmdhoon.todolist.R;
 import com.tmdhoon.todolist.Request.SignInRequest;
 import com.tmdhoon.todolist.Response.SignInResponse;
 import com.tmdhoon.todolist.databinding.ActivitySigninBinding;
-import com.tmdhoon.todolist.databinding.FragmentMypageBinding;
-import com.tmdhoon.todolist.databinding.FragmentPostBinding;
-import com.tmdhoon.todolist.fragment.PostFragment;
-
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -28,7 +24,12 @@ public class SignInActivity extends AppCompatActivity {
 
     private ActivitySigninBinding binding;
 
-    public static String token;
+    private TextView user_name;
+    private TextView user_age;
+    private TextView user_id;
+
+
+    public static String AccessToken;
 
 
     @Override
@@ -36,7 +37,20 @@ public class SignInActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
 
         binding = ActivitySigninBinding.inflate(getLayoutInflater());
+
         setContentView(binding.getRoot());
+
+        user_name = (TextView) findViewById(R.id.tvuser_name);
+        user_age = (TextView) findViewById(R.id.tvuser_age);
+        user_id = (TextView) findViewById(R.id.tvuser_id);
+
+        binding.admin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                startActivity(intent);
+            }
+        });
 
         binding.tvLogin.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -82,7 +96,7 @@ public class SignInActivity extends AppCompatActivity {
                 if (response.isSuccessful()) {
                     Toast.makeText(SignInActivity.this, "로그인에 성공했습니다!", Toast.LENGTH_SHORT).show();
 
-                    token = response.body().getToken();
+                    AccessToken = response.body().getToken();
 
                     Intent intent = new Intent(getApplicationContext(), MainActivity.class);
                     startActivity(intent);

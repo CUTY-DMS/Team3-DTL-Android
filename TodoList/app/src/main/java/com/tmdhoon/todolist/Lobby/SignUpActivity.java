@@ -74,6 +74,7 @@ public class SignUpActivity extends AppCompatActivity {
             @Override
             public void onResponse(Call<SignUpResponse> call, Response<SignUpResponse> response) {
                 if (response.isSuccessful()) {
+                    signUpResponse();
                     Log.e("Test", "success");
                     Toast.makeText(SignUpActivity.this, "회원가입에 성공했습니다", Toast.LENGTH_SHORT).show();
                     Intent intent = new Intent(getApplicationContext(), SignInActivity.class);

@@ -4,53 +4,71 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.CheckBox;
 import android.widget.TextView;
+import android.widget.Toast;
 
-import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.tmdhoon.todolist.Api.ApiProvider;
+import com.tmdhoon.todolist.Api.ServerApi;
+import com.tmdhoon.todolist.Lobby.SignInActivity;
 import com.tmdhoon.todolist.R;
-import com.tmdhoon.todolist.Recyclerview.ReData;
 import com.tmdhoon.todolist.Recyclerview.TodoAdapter;
+import com.tmdhoon.todolist.Response.MainResponse;
 
 import java.util.ArrayList;
+import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class HomeFragment extends Fragment{
 
-    private ArrayList<ReData> arrayList = new ArrayList<>();
     private RecyclerView recyclerView;
+    private LinearLayoutManager linearLayoutManager;
     private TodoAdapter todoAdapter;
-    private CheckBox checkBox;
-    private TextView tvTodo;
+    List<MainResponse> mainResponseList;
 
-   public View onCreateView(LayoutInflater inflater, ViewGroup containter,
-                            Bundle savedInstanceState){
-       View view = inflater.inflate(R.layout.fragment_home, containter, false);
+    public View onCreateView(LayoutInflater inflater, ViewGroup containter,
+                             Bundle savedInstanceState){
+        View view = inflater.inflate(R.layout.fragment_home, containter, false);
 
-       recyclerView = (RecyclerView) view.findViewById(R.id.recyclerview);
-       recyclerView.setHasFixedSize(true);
-       todoAdapter = new TodoAdapter(arrayList);
+        mainResponseList = new ArrayList<>();
 
-       RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getActivity());
+        recyclerView = view.findViewById(R.id.recyclerview);
 
-       recyclerView.setLayoutManager(layoutManager);
-       recyclerView.setItemAnimator(new DefaultItemAnimator());
-       recyclerView.setAdapter(todoAdapter);
+        linearLayoutManager = new LinearLayoutManager(getActivity());
 
+        recyclerView.setLayoutManager(linearLayoutManager);
 
-       return view;
-   }
+        todoAdapter = new TodoAdapter(mainResponseList);
 
-   public void onCreate(@Nullable Bundle savedInstatnceState){
-       super.onCreate(savedInstatnceState);
-       TodoData();
-   }
+        recyclerView.setAdapter(todoAdapter);
+
+        fetchPosts();
 
 
-    private void TodoData(){
+
+        return view;
+    }
+
+    private void fetchPosts(){
+        ServerApi serverApi = ApiProvider.getInstance().create(ServerApi.class);
+
+        serverApi.main(SignInActivity.AccessToken).enqueue(new Callback<List<MainResponse>>() {
+            @Override
+            public void onResponse(Call<List<MainResponse>> call, Response<List<MainResponse>> response) {
+                mainResponseList.addAll(response.body());
+                todoAdapter.notifyDataSetChanged();
+            }
+
+            @Override
+            public void onFailure(Call<List<MainResponse>> call, Throwable t) {
+                Toast.makeText(getActivity(), "Error: " + t.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 }

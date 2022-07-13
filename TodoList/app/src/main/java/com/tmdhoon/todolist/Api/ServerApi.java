@@ -2,11 +2,12 @@ package com.tmdhoon.todolist.Api;
 
 import com.tmdhoon.todolist.Request.PostRequest;
 import com.tmdhoon.todolist.Request.SignInRequest;
-import com.tmdhoon.todolist.Response.MyResponse;
-import com.tmdhoon.todolist.Response.PostResponse;
+import com.tmdhoon.todolist.Response.MainResponse;
 import com.tmdhoon.todolist.Response.SignInResponse;
 import com.tmdhoon.todolist.Request.SignUpRequest;
 import com.tmdhoon.todolist.Response.SignUpResponse;
+
+import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.http.Body;
@@ -28,13 +29,13 @@ public interface ServerApi {
 
     @POST("post")
     Call<PostRequest> post(
-            @Header("Authentication") String token,
+            @Header("AccessToken") String token,
             @Body PostRequest postRequest
     );
 
-    @GET("users/my")
-    Call<MyResponse> search(
-            @Header("Authentication") String token
+    @GET("post/main")
+    Call<List<MainResponse>> main(
+            @Header("AccessToken") String token
     );
 
 }

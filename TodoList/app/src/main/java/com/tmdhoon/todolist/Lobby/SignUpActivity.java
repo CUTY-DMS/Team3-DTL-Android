@@ -62,26 +62,26 @@ public class SignUpActivity extends AppCompatActivity {
     }
 
     public void signUpResponse() {
-        String userId = binding.etRegisterName.getText().toString().trim();
+        String userName = binding.etRegisterName.getText().toString();
         int userAge = Integer.parseInt(binding.etRegisterAge.getText().toString());
-        String userName = binding.etRegisterId.getText().toString().trim();
-        String userPw = binding.etRegisterPw.getText().toString().trim();
+        String userId = binding.etRegisterId.getText().toString();
+        String userPw = binding.etRegisterPw.getText().toString();
 
         SignUpRequest signUpRequest = new SignUpRequest(userName, userAge, userId, userPw);
+
         ServerApi serverApi = ApiProvider.getInstance().create(ServerApi.class);
 
         serverApi.signUp(signUpRequest).enqueue(new Callback<SignUpResponse>() {
             @Override
             public void onResponse(Call<SignUpResponse> call, Response<SignUpResponse> response) {
-                if (response.isSuccessful()) {
-                    signUpResponse();
+                if (response.code() == 200) {
+
                     Log.e("Test", "success");
+
                     Toast.makeText(SignUpActivity.this, "회원가입에 성공했습니다", Toast.LENGTH_SHORT).show();
+
                     Intent intent = new Intent(getApplicationContext(), SignInActivity.class);
                     startActivity(intent);
-                } else {
-                    Log.e("Test", "onResponse else");
-                    Toast.makeText(SignUpActivity.this, "오류", Toast.LENGTH_SHORT).show();
                 }
             }
 
@@ -92,6 +92,4 @@ public class SignUpActivity extends AppCompatActivity {
             }
         });
     }
-
-
 }

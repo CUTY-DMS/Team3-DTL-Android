@@ -17,31 +17,15 @@ public class SignUpRequest {
         return userName;
     }
 
-    public void setUserName(String userName) {
-        this.userName = userName;
-    }
-
     public int getUserAge() {
         return userAge;
-    }
-
-    public void setUserAge(int userAge) {
-        this.userAge = userAge;
     }
 
     public String getUserId() {
         return userId;
     }
 
-    public void setUserId(String userId) {
-        this.userId = userId;
-    }
-
     public String getUserPw() {
         return userPw;
-    }
-
-    public void setUserPw(String userPw) {
-        this.userPw = userPw;
     }
 }

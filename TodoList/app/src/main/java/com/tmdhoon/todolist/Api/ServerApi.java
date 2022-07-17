@@ -47,6 +47,7 @@ public interface ServerApi {
 
     @POST("post/main/like/{todoId}")
     Call<Void> like(
+            @Header("AccessToken") String token,
             @Path("todoId") long todoId
     );
 

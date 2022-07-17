@@ -2,8 +2,13 @@ package com.tmdhoon.todolist.Lobby;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.InputType;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
@@ -32,6 +37,7 @@ public class SignInActivity extends AppCompatActivity {
     public static String AccessToken;
 
 
+    @SuppressLint("SetTextI18n")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -43,11 +49,37 @@ public class SignInActivity extends AppCompatActivity {
         user_name = (TextView) findViewById(R.id.tvuser_name);
         user_id = (TextView) findViewById(R.id.tvuser_id);
 
+        binding.etId.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                int length = binding.etId.getText().length();
+                if(length == 20){
+                    binding.tvidCount.setTextColor(Color.RED);
+
+                }else{
+                    binding.tvidCount.setTextColor(Color.BLACK);
+                }
+                binding.tvidCount.setText(length + "/20");
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+
+            }
+        });
+
         binding.tvLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(getApplicationContext(), SignUpActivity.class);
                 startActivity(intent);
+                finish();
             }
         });
 
@@ -91,6 +123,7 @@ public class SignInActivity extends AppCompatActivity {
 
                     Intent intent = new Intent(getApplicationContext(), MainActivity.class);
                     startActivity(intent);
+                    finish();
 
                 } else if (response.code() == 404) {
                     Toast.makeText(SignInActivity.this, "아이디를 확인해주세요", Toast.LENGTH_SHORT).show();

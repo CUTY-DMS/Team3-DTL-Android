@@ -17,6 +17,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.tmdhoon.todolist.Api.ApiProvider;
 import com.tmdhoon.todolist.Api.ServerApi;
 import com.tmdhoon.todolist.Lobby.DetailActivity;
+import com.tmdhoon.todolist.Lobby.SignInActivity;
 import com.tmdhoon.todolist.R;
 import com.tmdhoon.todolist.Response.MainResponse;
 import com.tmdhoon.todolist.databinding.TodolistRecyclerviewBinding;
@@ -86,33 +87,25 @@ public class TodoAdapter extends RecyclerView.Adapter<TodoAdapter.TodoViewHolder
             @Override
             public void onClick(View view) {
                 if(i == 0) {
-                    serverApi.like(list.get(position).getId()).enqueue(new Callback<Void>() {
+                    serverApi.like(SignInActivity.AccessToken,list.get(position).getId()).enqueue(new Callback<Void>() {
                         @Override
                         public void onResponse(Call<Void> call, Response<Void> response) {
-                            Toast.makeText(view.getContext(), "like onResponse", Toast.LENGTH_SHORT).show();
-                            notifyDataSetChanged();
                         }
 
                         @Override
                         public void onFailure(Call<Void> call, Throwable t) {
-                            Toast.makeText(view.getContext(), "like onFailure", Toast.LENGTH_SHORT).show();
-                            notifyDataSetChanged();
                         }
                     });
                     i++;
                     holder.like.setImageResource(R.drawable.red);
                 }else if(i == 1){
-                    serverApi.like(list.get(position).getId()).enqueue(new Callback<Void>() {
+                    serverApi.like(SignInActivity.AccessToken,list.get(position).getId()).enqueue(new Callback<Void>() {
                         @Override
                         public void onResponse(Call<Void> call, Response<Void> response) {
-                            Toast.makeText(view.getContext(), "unlike onResponse", Toast.LENGTH_SHORT).show();
-                            notifyDataSetChanged();
                         }
 
                         @Override
                         public void onFailure(Call<Void> call, Throwable t) {
-                            Toast.makeText(view.getContext(), "unlike onFailure", Toast.LENGTH_SHORT).show();
-                            notifyDataSetChanged();
                         }
                     });
                     i--;

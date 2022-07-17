@@ -49,14 +49,6 @@ public class HomeFragment extends Fragment{
 
         recyclerView.setAdapter(todoAdapter);
 
-        load();
-
-
-
-        return view;
-    }
-
-    private void load(){
         ServerApi serverApi = ApiProvider.getInstance().create(ServerApi.class);
 
         serverApi.main(SignInActivity.AccessToken).enqueue(new Callback<List<MainResponse>>() {
@@ -71,5 +63,7 @@ public class HomeFragment extends Fragment{
                 Toast.makeText(getActivity(), "Error: " + t.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });
+
+        return view;
     }
 }

@@ -4,7 +4,10 @@ package com.tmdhoon.todolist.Lobby;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -33,6 +36,61 @@ public class SignUpActivity extends AppCompatActivity {
 
         binding = ActivitySignupBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+
+        binding.tvRegister.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getApplicationContext(), SignInActivity.class);
+                startActivity(intent);
+                finish();
+            }
+        });
+
+        binding.etRegisterName.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                int length = binding.etRegisterName.getText().length();
+                if(length == 10){
+                    binding.tvnameCount.setTextColor(Color.RED);
+                }else{
+                    binding.tvnameCount.setTextColor(Color.BLACK);
+                }
+                binding.tvnameCount.setText(length + "/10");
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+
+            }
+        });
+
+        binding.etRegisterId.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                int length = binding.etRegisterId.getText().length();
+                if(length == 20){
+                    binding.tvidCount.setTextColor(Color.RED);
+                }else{
+                    binding.tvidCount.setTextColor(Color.BLACK);
+                }
+                binding.tvidCount.setText(length + "/20");
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+
+            }
+        });
 
         btRegister = (Button) findViewById(R.id.btRegister);
 
@@ -82,6 +140,7 @@ public class SignUpActivity extends AppCompatActivity {
 
                     Intent intent = new Intent(getApplicationContext(), SignInActivity.class);
                     startActivity(intent);
+                    finish();
                 }
             }
 

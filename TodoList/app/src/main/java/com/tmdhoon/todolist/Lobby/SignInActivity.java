@@ -28,16 +28,12 @@ import retrofit2.Response;
 public class SignInActivity extends AppCompatActivity {
 
     private ActivitySigninBinding binding;
-
     private TextView user_name;
     private TextView user_age;
     private TextView user_id;
 
-
     public static String AccessToken;
 
-
-    @SuppressLint("SetTextI18n")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

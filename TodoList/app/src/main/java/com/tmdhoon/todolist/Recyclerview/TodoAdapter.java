@@ -90,10 +90,12 @@ public class TodoAdapter extends RecyclerView.Adapter<TodoAdapter.TodoViewHolder
                     serverApi.like(SignInActivity.AccessToken,list.get(position).getId()).enqueue(new Callback<Void>() {
                         @Override
                         public void onResponse(Call<Void> call, Response<Void> response) {
+                            Toast.makeText(view.getContext(), "좋아요 성공", 300).show();
                         }
 
                         @Override
                         public void onFailure(Call<Void> call, Throwable t) {
+                            
                         }
                     });
                     i++;
@@ -102,6 +104,7 @@ public class TodoAdapter extends RecyclerView.Adapter<TodoAdapter.TodoViewHolder
                     serverApi.like(SignInActivity.AccessToken,list.get(position).getId()).enqueue(new Callback<Void>() {
                         @Override
                         public void onResponse(Call<Void> call, Response<Void> response) {
+                            Toast.makeText(view.getContext(), "좋아요 취소 성공", 300).show();
                         }
 
                         @Override

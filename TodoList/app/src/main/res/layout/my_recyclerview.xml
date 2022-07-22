@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
@@ -44,6 +45,39 @@
             android:layout_marginRight="8dp"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintRight_toRightOf="parent"/>
+
+        <ImageView
+            android:id="@+id/ivdelete"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_baseline_delete_24"
+            android:layout_marginBottom="8dp"
+            android:layout_marginRight="8dp"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"/>
+
+        <ImageView
+            android:id="@+id/ivedit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_baseline_edit_24"
+            android:layout_marginRight="8dp"
+            app:layout_constraintRight_toLeftOf="@id/ivdelete"
+            app:layout_constraintTop_toTopOf="@id/ivdelete"
+            app:layout_constraintBottom_toBottomOf="@id/ivdelete"/>
+
+<!--        <Button-->
+<!--            android:id="@+id/btedit"-->
+<!--            android:layout_width="56dp"-->
+<!--            android:layout_height="32dp"-->
+<!--            android:text="수정"-->
+<!--            android:textSize="10sp"-->
+<!--            android:textStyle="bold"-->
+<!--            android:fontFamily="@font/dohyeon"-->
+<!--            android:layout_marginRight="8dp"-->
+<!--            android:layout_marginBottom="8dp"-->
+<!--            app:layout_constraintBottom_toBottomOf="parent"-->
+<!--            app:layout_constraintRight_toRightOf="parent" />-->
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

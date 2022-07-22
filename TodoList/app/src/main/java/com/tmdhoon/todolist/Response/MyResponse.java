@@ -1,5 +1,7 @@
 package com.tmdhoon.todolist.Response;
 
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 public class MyResponse {
@@ -7,18 +9,13 @@ public class MyResponse {
     private String user_name;
     private String user_id;
     private long user_age;
+    private ArrayList<MyTodoResponse> todos;
 
-    private String title;
-    private String content;
-    private String created_at;
-
-    public MyResponse(String user_name, String user_id, long user_age, String title, String content, String created_at) {
+    public MyResponse(String user_name, String user_id, long user_age, ArrayList<MyTodoResponse> todos) {
         this.user_name = user_name;
         this.user_id = user_id;
         this.user_age = user_age;
-        this.title = title;
-        this.content = content;
-        this.created_at = created_at;
+        this.todos = todos;
     }
 
     public String getUser_name() {
@@ -33,15 +30,7 @@ public class MyResponse {
         return user_age;
     }
 
-    public String getTitle() {
-        return title;
-    }
-
-    public String getContent() {
-        return content;
-    }
-
-    public String getCreated_at() {
-        return created_at;
+    public ArrayList<MyTodoResponse> getArrayList() {
+        return todos;
     }
 }

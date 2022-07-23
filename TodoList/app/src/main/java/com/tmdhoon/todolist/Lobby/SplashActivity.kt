@@ -1,10 +1,9 @@
-package com.tmdhoon.todolist
+package com.tmdhoon.todolist.Lobby
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
-import com.tmdhoon.todolist.Lobby.SignInActivity
 import com.tmdhoon.todolist.databinding.ActivitySplashBinding
 
 class SplashActivity : AppCompatActivity() {
@@ -22,7 +21,7 @@ class SplashActivity : AppCompatActivity() {
             intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION)
             startActivity(intent)
             finish()
-        },DURATION)
+        }, DURATION)
     }
     companion object{
         private const val DURATION : Long = 2000

@@ -28,9 +28,6 @@ import retrofit2.Response;
 public class SignInActivity extends AppCompatActivity {
 
     private ActivitySigninBinding binding;
-    private TextView user_name;
-    private TextView user_age;
-    private TextView user_id;
 
     public static String AccessToken;
 
@@ -42,9 +39,6 @@ public class SignInActivity extends AppCompatActivity {
 
         setContentView(binding.getRoot());
 
-        user_name = (TextView) findViewById(R.id.tvuser_name);
-        user_id = (TextView) findViewById(R.id.tvuser_id);
-
         binding.etId.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
@@ -54,14 +48,11 @@ public class SignInActivity extends AppCompatActivity {
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
                 int length = binding.etId.getText().length();
-                if(length == 20){
-                    binding.tvidCount.setTextColor(Color.RED);
 
-                }else{
-                    binding.tvidCount.setTextColor(Color.BLACK);
-                }
                 binding.tvidCount.setText(length + "/20");
 
+                if(length == 20) binding.tvidCount.setTextColor(Color.RED);
+                else binding.tvidCount.setTextColor(Color.BLACK);
             }
 
             @Override
@@ -92,13 +83,10 @@ public class SignInActivity extends AppCompatActivity {
         String userId = binding.etId.getText().toString();
         String userPw = binding.etPw.getText().toString();
 
-        if(userId.length() == 0){
-            Toast.makeText(SignInActivity.this, "아이디를 입력해주세요", Toast.LENGTH_SHORT).show();
-        }else if(userPw.length() == 0){
-            Toast.makeText(SignInActivity.this, "비밀번호를 입력해주세요", Toast.LENGTH_SHORT).show();
-        }else{
-            signInResponse();
-        }
+        if(userId.length() == 0) Toast.makeText(SignInActivity.this, "아이디를 입력해주세요", Toast.LENGTH_SHORT).show();
+        else if(userPw.length() == 0) Toast.makeText(SignInActivity.this, "비밀번호를 입력해주세요", Toast.LENGTH_SHORT).show();
+        else signInResponse();
+
     }
 
     public void signInResponse() {

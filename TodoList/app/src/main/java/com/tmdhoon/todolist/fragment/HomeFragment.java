@@ -38,11 +38,8 @@ public class HomeFragment extends Fragment{
         View view = inflater.inflate(R.layout.fragment_home, containter, false);
 
         mainResponseList = new ArrayList<>();
-
         recyclerView = view.findViewById(R.id.recyclerview);
-
         linearLayoutManager = new LinearLayoutManager(getActivity());
-
         recyclerView.setLayoutManager(linearLayoutManager);
 
         todoAdapter = new TodoAdapter(mainResponseList);

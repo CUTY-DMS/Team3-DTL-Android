@@ -13,7 +13,7 @@
         android:theme="@style/Theme.TodoList.Splash"
         android:usesCleartextTraffic="true">
         <activity
-            android:name=".MyDetailActivity"
+            android:name=".Lobby.MyDetailActivity"
             android:exported="false" />
         <activity
             android:name=".Lobby.DetailActivity"
@@ -22,13 +22,13 @@
             android:name=".Lobby.SignUpActivity"
             android:exported="false" />
         <activity
-            android:name=".Lobby.SignInActivity"
-            android:exported="false" />
-        <activity
             android:name=".Lobby.MainActivity"
             android:exported="false" />
         <activity
-            android:name=".SplashActivity"
+            android:name=".Lobby.SignInActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Lobby.SplashActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

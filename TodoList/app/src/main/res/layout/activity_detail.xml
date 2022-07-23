@@ -12,11 +12,12 @@
         android:layout_height="wrap_content"
         android:text="Title"
         android:textSize="40sp"
+        android:textColor="@color/black"
         android:fontFamily="@font/dohyeon"
         android:layout_marginTop="48dp"
         android:layout_marginLeft="32dp"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toTopOf="parent"/>
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent" />
 
     <TextView
         android:id="@+id/tvContent"
@@ -24,6 +25,7 @@
         android:layout_height="wrap_content"
         android:text="Content"
         android:textSize="20sp"
+        android:textColor="@color/black"
         android:fontFamily="@font/dohyeon"
         android:layout_marginTop="24dp"
         android:layout_marginLeft="56dp"
@@ -34,23 +36,25 @@
         android:id="@+id/tvMemeber_id"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:fontFamily="@font/dohyeon"
         android:text="Memeber_id"
-        android:textSize="20sp"
+        android:textSize="18sp"
+        android:textColor="@color/black"
+        android:fontFamily="@font/dohyeon"
         android:layout_marginRight="16dp"
-        app:layout_constraintBottom_toBottomOf="@+id/tvTitle"
-        app:layout_constraintRight_toRightOf="parent" />
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintBottom_toBottomOf="@+id/tvTitle"/>
 
     <TextView
         android:id="@+id/tvCreated_at"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:fontFamily="@font/dohyeon"
         android:text="Created_at"
-        android:textSize="20sp"
+        android:textSize="16sp"
+        android:textColor="@color/black"
+        android:fontFamily="@font/dohyeon"
         android:layout_marginTop="16dp"
         android:layout_marginRight="16dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintRight_toRightOf="parent"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

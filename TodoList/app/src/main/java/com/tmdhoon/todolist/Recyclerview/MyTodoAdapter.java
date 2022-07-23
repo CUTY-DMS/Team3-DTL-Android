@@ -1,11 +1,9 @@
 package com.tmdhoon.todolist.Recyclerview;
 
 import android.content.Intent;
-import android.media.Image;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -16,14 +14,10 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.tmdhoon.todolist.Api.ApiProvider;
 import com.tmdhoon.todolist.Api.ServerApi;
 import com.tmdhoon.todolist.Lobby.SignInActivity;
-import com.tmdhoon.todolist.MyDetailActivity;
+import com.tmdhoon.todolist.Lobby.MyDetailActivity;
 import com.tmdhoon.todolist.R;
-import com.tmdhoon.todolist.Request.EditRequest;
 import com.tmdhoon.todolist.Response.MyTodoResponse;
 
-import org.w3c.dom.Text;
-
-import java.util.ArrayList;
 import java.util.List;
 
 import retrofit2.Call;
@@ -91,12 +85,6 @@ public class MyTodoAdapter extends RecyclerView.Adapter<MyTodoAdapter.MyTodoView
                     @Override
                     public void onResponse(Call<Void> call, Response<Void> response) {
                         if(response.isSuccessful()){
-//                            try{
-//                                arrayList.remove(position);
-//                                notifyItemChanged(position);
-//                            } catch (IndexOutOfBoundsException e){
-//                                e.printStackTrace();
-//                            }
                             Toast.makeText(view.getContext(), "성공적으로 삭제되었습니다", Toast.LENGTH_SHORT).show();
                         }
                     }

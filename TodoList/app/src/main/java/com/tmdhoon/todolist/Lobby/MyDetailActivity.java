@@ -1,15 +1,17 @@
-package com.tmdhoon.todolist;
+package com.tmdhoon.todolist.Lobby;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.graphics.Color;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.View;
 import android.widget.Toast;
 
 import com.tmdhoon.todolist.Api.ApiProvider;
 import com.tmdhoon.todolist.Api.ServerApi;
 import com.tmdhoon.todolist.Lobby.SignInActivity;
-import com.tmdhoon.todolist.Recyclerview.MyTodoAdapter;
 import com.tmdhoon.todolist.Request.EditRequest;
 import com.tmdhoon.todolist.databinding.ActivityMyDetailBinding;
 
@@ -30,12 +32,50 @@ public class MyDetailActivity extends AppCompatActivity {
 
         Bundle extras = getIntent().getExtras();
 
+        binding.eteditTitle.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                binding.tvedittitleCount.setText(binding.eteditTitle.getText().length() + "/20");
+                if(binding.eteditTitle.getText().length() == 20) binding.tvedittitleCount.setTextColor(Color.RED);
+                else binding.tvedittitleCount.setTextColor(Color.BLACK);
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+
+            }
+        });
+
+        binding.eteditContent.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                binding.tveditcontentCount.setText(binding.eteditContent.getText().length() + "/100");
+                if(binding.eteditContent.getText().length() == 100) binding.tveditcontentCount.setTextColor(Color.RED);
+                else binding.tvedittitleCount.setTextColor(Color.BLACK);
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+
+            }
+        });
+
         long id = (long) extras.get("id");
         String Title = extras.getString("title");
         String Content = extras.getString("content");
 
-        binding.eteditTitle.setHint(Title);
-        binding.eteditContent.setHint(Content);
+        binding.eteditTitle.setText(Title);
+        binding.eteditContent.setText(Content);
 
         binding.bteditPost.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -68,5 +108,14 @@ public class MyDetailActivity extends AppCompatActivity {
                 }
             }
         });
+
+        binding.bteditDelete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                binding.eteditTitle.setText("");
+                binding.eteditContent.setText("");
+            }
+        });
+
     }
 }

@@ -49,11 +49,8 @@ public class MypageFragment extends Fragment {
         userage = rootView.findViewById(R.id.tvuser_age);
 
         todos = new ArrayList<>();
-
         RecyclerView recyclerView = rootView.findViewById(R.id.myRecyclerview);
-
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity());
-
         recyclerView.setLayoutManager(linearLayoutManager);
 
         myTodoAdapter = new MyTodoAdapter(todos);
@@ -78,18 +75,10 @@ public class MypageFragment extends Fragment {
             }
 
             @Override
-            public void onFailure(Call<MyResponse> call, Throwable t) {
-
-            }
+            public void onFailure(Call<MyResponse> call, Throwable t) {}
         });
 
         return rootView;
 
-    }
-
-    @Override
-    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
-        myTodoAdapter.notifyDataSetChanged();
     }
 }

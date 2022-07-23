@@ -35,6 +35,7 @@ public class TodoAdapter extends RecyclerView.Adapter<TodoAdapter.TodoViewHolder
 
     private List<MainResponse> list;
     private TodolistRecyclerviewBinding binding;
+    private TodoAdapter todoAdapter;
 
     public class TodoViewHolder extends RecyclerView.ViewHolder {
 
@@ -90,7 +91,7 @@ public class TodoAdapter extends RecyclerView.Adapter<TodoAdapter.TodoViewHolder
                     serverApi.like(SignInActivity.AccessToken,list.get(position).getId()).enqueue(new Callback<Void>() {
                         @Override
                         public void onResponse(Call<Void> call, Response<Void> response) {
-                            Toast.makeText(view.getContext(), "좋아요 성공", 300).show();
+                            todoAdapter.notifyDataSetChanged();
                         }
 
                         @Override
@@ -104,7 +105,7 @@ public class TodoAdapter extends RecyclerView.Adapter<TodoAdapter.TodoViewHolder
                     serverApi.like(SignInActivity.AccessToken,list.get(position).getId()).enqueue(new Callback<Void>() {
                         @Override
                         public void onResponse(Call<Void> call, Response<Void> response) {
-                            Toast.makeText(view.getContext(), "좋아요 취소 성공", 300).show();
+                            todoAdapter.notifyDataSetChanged();
                         }
 
                         @Override
@@ -120,7 +121,7 @@ public class TodoAdapter extends RecyclerView.Adapter<TodoAdapter.TodoViewHolder
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Log.d("TodoAdapter", "onClick");
+
                 Intent intent = new Intent(view.getContext(), DetailActivity.class);
 
                 intent.putExtra("title", list.get(position).getTitle());

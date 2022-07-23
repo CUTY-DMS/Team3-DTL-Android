@@ -27,8 +27,6 @@ import retrofit2.Response;
 public class SignUpActivity extends AppCompatActivity {
 
     private ActivitySignupBinding binding;
-    private String TAG;
-    private Button btRegister;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,15 +34,6 @@ public class SignUpActivity extends AppCompatActivity {
 
         binding = ActivitySignupBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
-
-        binding.tvRegister.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(getApplicationContext(), SignInActivity.class);
-                startActivity(intent);
-                finish();
-            }
-        });
 
         binding.etRegisterName.addTextChangedListener(new TextWatcher() {
             @Override
@@ -55,12 +44,12 @@ public class SignUpActivity extends AppCompatActivity {
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
                 int length = binding.etRegisterName.getText().length();
-                if(length == 10){
-                    binding.tvnameCount.setTextColor(Color.RED);
-                }else{
-                    binding.tvnameCount.setTextColor(Color.BLACK);
-                }
+
                 binding.tvnameCount.setText(length + "/10");
+
+                if(length == 10) binding.tvnameCount.setTextColor(Color.RED);
+                else binding.tvnameCount.setTextColor(Color.BLACK);
+
             }
 
             @Override
@@ -78,12 +67,11 @@ public class SignUpActivity extends AppCompatActivity {
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
                 int length = binding.etRegisterId.getText().length();
-                if(length == 20){
-                    binding.tvidCount.setTextColor(Color.RED);
-                }else{
-                    binding.tvidCount.setTextColor(Color.BLACK);
-                }
+
                 binding.tvidCount.setText(length + "/20");
+
+                if(length == 20) binding.tvidCount.setTextColor(Color.RED);
+                else binding.tvidCount.setTextColor(Color.BLACK);
             }
 
             @Override
@@ -92,21 +80,24 @@ public class SignUpActivity extends AppCompatActivity {
             }
         });
 
-        btRegister = (Button) findViewById(R.id.btRegister);
-
         binding.btRegister.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Log.e("Test", "fwdefewfwefwf");
                 signUp();
             }
         });
 
-
+        binding.tvRegister.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getApplicationContext(), SignInActivity.class);
+                startActivity(intent);
+                finish();
+            }
+        });
     }
 
     private void signUp() {
-        Log.e("Test", "singUp");
         String userId = binding.etRegisterId.getText().toString();
         int userAge = Integer.parseInt(binding.etRegisterAge.getText().toString());
         String userName = binding.etRegisterName.getText().toString();
@@ -114,9 +105,8 @@ public class SignUpActivity extends AppCompatActivity {
 
         if (userName.length() == 0 || userId.length() == 0 || userPw.length() == 0 || (int)(Math.log10(userAge)+1) == 0) {
             Toast.makeText(SignUpActivity.this, "모든 항목을 입력해주세요", Toast.LENGTH_SHORT).show();
-        } else {
-            signUpResponse();
-        }
+        } else signUpResponse();
+
     }
 
     public void signUpResponse() {
@@ -134,8 +124,6 @@ public class SignUpActivity extends AppCompatActivity {
             public void onResponse(Call<SignUpResponse> call, Response<SignUpResponse> response) {
                 if (response.code() == 200) {
 
-                    Log.e("Test", "success");
-
                     Toast.makeText(SignUpActivity.this, "회원가입에 성공했습니다", Toast.LENGTH_SHORT).show();
 
                     Intent intent = new Intent(getApplicationContext(), SignInActivity.class);
@@ -146,7 +134,6 @@ public class SignUpActivity extends AppCompatActivity {
 
             @Override
             public void onFailure(Call<SignUpResponse> call, Throwable t) {
-                Log.e("Test", "onFailure");
                 Toast.makeText(SignUpActivity.this, "통신 실패", Toast.LENGTH_SHORT).show();
             }
         });

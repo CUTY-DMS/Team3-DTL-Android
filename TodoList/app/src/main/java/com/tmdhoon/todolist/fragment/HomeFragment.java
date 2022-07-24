@@ -1,22 +1,21 @@
 package com.tmdhoon.todolist.fragment;
 
-import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.tmdhoon.todolist.Api.ApiProvider;
 import com.tmdhoon.todolist.Api.ServerApi;
 import com.tmdhoon.todolist.Lobby.SignInActivity;
 import com.tmdhoon.todolist.R;
-import com.tmdhoon.todolist.Recyclerview.TodoAdapter;
+import com.tmdhoon.todolist.Adapter.TodoAdapter;
 import com.tmdhoon.todolist.Response.MainResponse;
 
 import java.util.ArrayList;
@@ -31,6 +30,7 @@ public class HomeFragment extends Fragment{
     private RecyclerView recyclerView;
     private LinearLayoutManager linearLayoutManager;
     private TodoAdapter todoAdapter;
+    private SwipeRefreshLayout swipeRefreshLayout;
     List<MainResponse> mainResponseList;
 
     public View onCreateView(LayoutInflater inflater, ViewGroup containter,
@@ -45,6 +45,15 @@ public class HomeFragment extends Fragment{
         todoAdapter = new TodoAdapter(mainResponseList);
 
         recyclerView.setAdapter(todoAdapter);
+
+        swipeRefreshLayout = view.findViewById(R.id.swipelayout);
+        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                todoAdapter.notifyDataSetChanged();
+                swipeRefreshLayout.setRefreshing(false);
+            }
+        });
 
         ServerApi serverApi = ApiProvider.getInstance().create(ServerApi.class);
 

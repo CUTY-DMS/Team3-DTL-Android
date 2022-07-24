@@ -85,10 +85,10 @@
                app:layout_constraintRight_toRightOf="parent"/>
 
            <ImageView
-               android:id="@+id/tvLike"
-               android:layout_width="16dp"
-               android:layout_height="16dp"
-               android:src="@drawable/white"
+               android:id="@+id/ivLike"
+               android:layout_width="20dp"
+               android:layout_height="20dp"
+               android:src="@drawable/ic_baseline_favorite_24"
                android:layout_marginRight="16dp"
                app:layout_constraintBottom_toBottomOf="@+id/tvlike_count"
                app:layout_constraintEnd_toStartOf="@+id/tvlike_count"
@@ -98,13 +98,13 @@
                android:id="@+id/tvsuccess"
                android:layout_width="wrap_content"
                android:layout_height="wrap_content"
+               android:layout_marginRight="16dp"
                android:fontFamily="@font/dohyeon"
                android:text="완료"
                android:textColor="@color/black"
-               android:layout_marginRight="16dp"
-               app:layout_constraintBottom_toBottomOf="@+id/tvLike"
-               app:layout_constraintEnd_toStartOf="@+id/tvLike"
-               app:layout_constraintTop_toTopOf="@+id/tvLike" />
+               app:layout_constraintBottom_toBottomOf="@+id/ivLike"
+               app:layout_constraintEnd_toStartOf="@+id/ivLike"
+               app:layout_constraintTop_toTopOf="@+id/ivLike" />
 
        </androidx.constraintlayout.widget.ConstraintLayout>
 

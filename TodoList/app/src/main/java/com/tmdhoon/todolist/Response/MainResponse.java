@@ -8,16 +8,16 @@ public class MainResponse {
     private String created_at;
     private String member_id;
     private int like_count;
-    private String success;
+    private Boolean todo_success;
 
-    public MainResponse(long id, String content, String title, String created_at, String member_id, int like_count, String success) {
+    public MainResponse(long id, String content, String title, String created_at, String member_id, int like_count, Boolean todo_success) {
         this.id = id;
         this.content = content;
         this.title = title;
         this.created_at = created_at;
         this.member_id = member_id;
         this.like_count = like_count;
-        this.success = success;
+        this.todo_success = todo_success;
     }
 
     public long getId() {
@@ -44,7 +44,7 @@ public class MainResponse {
         return like_count;
     }
 
-    public String getSuccess() {
-        return success;
+    public Boolean getTodo_success() {
+        return todo_success;
     }
 }

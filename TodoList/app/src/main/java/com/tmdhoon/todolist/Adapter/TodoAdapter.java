@@ -1,17 +1,14 @@
-package com.tmdhoon.todolist.Recyclerview;
+package com.tmdhoon.todolist.Adapter;
 
-import android.content.Context;
 import android.content.Intent;
-import android.util.Log;
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.fragment.app.FragmentActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.tmdhoon.todolist.Api.ApiProvider;
@@ -21,9 +18,6 @@ import com.tmdhoon.todolist.Lobby.SignInActivity;
 import com.tmdhoon.todolist.R;
 import com.tmdhoon.todolist.Response.MainResponse;
 import com.tmdhoon.todolist.databinding.TodolistRecyclerviewBinding;
-import com.tmdhoon.todolist.fragment.HomeFragment;
-
-import org.w3c.dom.Text;
 
 import java.util.List;
 
@@ -44,7 +38,7 @@ public class TodoAdapter extends RecyclerView.Adapter<TodoAdapter.TodoViewHolder
         public TextView created_at;
         public TextView member_id;
         public TextView like_count;
-        public TextView success;
+        public TextView todo_success;
         public ImageView like;
 
         public TodoViewHolder(View view) {
@@ -54,8 +48,8 @@ public class TodoAdapter extends RecyclerView.Adapter<TodoAdapter.TodoViewHolder
             created_at = view.findViewById(R.id.tvcreated_at);
             member_id = view.findViewById(R.id.tvmember_id);
             like_count = view.findViewById(R.id.tvlike_count);
-            success = view.findViewById(R.id.tvsuccess);
-            like = view.findViewById(R.id.tvLike);
+            todo_success = view.findViewById(R.id.tvsuccess);
+            like = view.findViewById(R.id.ivLike);
         }
     }
 
@@ -80,41 +74,13 @@ public class TodoAdapter extends RecyclerView.Adapter<TodoAdapter.TodoViewHolder
         holder.created_at.setText(list.get(position).getCreated_at());
         holder.member_id.setText(list.get(position).getMember_id());
         holder.like_count.setText(String.valueOf(list.get(position).getLike_count()));
-        holder.success.setText(list.get(position).getSuccess());
+        if(list.get(position).getTodo_success() == false) holder.todo_success.setText("O");
+        else holder.todo_success.setText("X");
 
         holder.like.setOnClickListener(new View.OnClickListener() {
-            ServerApi serverApi = ApiProvider.getInstance().create(ServerApi.class);
-            int i;
             @Override
             public void onClick(View view) {
-                if(i == 0) {
-                    serverApi.like(SignInActivity.AccessToken,list.get(position).getId()).enqueue(new Callback<Void>() {
-                        @Override
-                        public void onResponse(Call<Void> call, Response<Void> response) {
-                            todoAdapter.notifyDataSetChanged();
-                        }
 
-                        @Override
-                        public void onFailure(Call<Void> call, Throwable t) {
-                            
-                        }
-                    });
-                    i++;
-                    holder.like.setImageResource(R.drawable.red);
-                }else if(i == 1){
-                    serverApi.like(SignInActivity.AccessToken,list.get(position).getId()).enqueue(new Callback<Void>() {
-                        @Override
-                        public void onResponse(Call<Void> call, Response<Void> response) {
-                            todoAdapter.notifyDataSetChanged();
-                        }
-
-                        @Override
-                        public void onFailure(Call<Void> call, Throwable t) {
-                        }
-                    });
-                    i--;
-                    holder.like.setImageResource(R.drawable.white);
-                }
             }
         });
 

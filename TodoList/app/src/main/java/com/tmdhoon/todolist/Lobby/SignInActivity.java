@@ -3,7 +3,9 @@ package com.tmdhoon.todolist.Lobby;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.text.Editable;
@@ -28,6 +30,7 @@ import retrofit2.Response;
 public class SignInActivity extends AppCompatActivity {
 
     private ActivitySigninBinding binding;
+    private ServerApi serverApi;
 
     public static String AccessToken;
 
@@ -36,7 +39,6 @@ public class SignInActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
 
         binding = ActivitySigninBinding.inflate(getLayoutInflater());
-
         setContentView(binding.getRoot());
 
         binding.etId.addTextChangedListener(new TextWatcher() {
@@ -95,7 +97,7 @@ public class SignInActivity extends AppCompatActivity {
 
         SignInRequest signInRequest = new SignInRequest(userId, userPw);
 
-        ServerApi serverApi = ApiProvider.getInstance().create(ServerApi.class);
+        serverApi = ApiProvider.getInstance().create(ServerApi.class);
 
         serverApi.signIn(signInRequest).enqueue(new Callback<SignInResponse>() {
             @Override
@@ -119,5 +121,12 @@ public class SignInActivity extends AppCompatActivity {
                 Toast.makeText(SignInActivity.this, "로그인에 실패했습니다", Toast.LENGTH_SHORT).show();
             }
         });
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+
+
     }
 }

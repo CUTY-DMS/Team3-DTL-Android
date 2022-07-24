@@ -1,13 +1,11 @@
 package com.tmdhoon.todolist.fragment;
 
-import android.annotation.SuppressLint;
 import android.os.Bundle;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -20,7 +18,7 @@ import com.tmdhoon.todolist.Api.ApiProvider;
 import com.tmdhoon.todolist.Api.ServerApi;
 import com.tmdhoon.todolist.Lobby.SignInActivity;
 import com.tmdhoon.todolist.R;
-import com.tmdhoon.todolist.Recyclerview.MyTodoAdapter;
+import com.tmdhoon.todolist.Adapter.MyTodoAdapter;
 import com.tmdhoon.todolist.Response.MyResponse;
 import com.tmdhoon.todolist.Response.MyTodoResponse;
 
@@ -37,6 +35,7 @@ public class MypageFragment extends Fragment {
     private TextView userid;
     private TextView userage;
     private ArrayList<MyTodoResponse> todos;
+    private SwipeRefreshLayout swipeRefreshLayout;
 
     private MyTodoAdapter myTodoAdapter;
 
@@ -49,13 +48,22 @@ public class MypageFragment extends Fragment {
         userage = rootView.findViewById(R.id.tvuser_age);
 
         todos = new ArrayList<>();
-        RecyclerView recyclerView = rootView.findViewById(R.id.myRecyclerview);
+        RecyclerView recyclerView = rootView.findViewById(R.id.myRecyclerView);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity());
         recyclerView.setLayoutManager(linearLayoutManager);
 
         myTodoAdapter = new MyTodoAdapter(todos);
 
         recyclerView.setAdapter(myTodoAdapter);
+
+        swipeRefreshLayout = rootView.findViewById(R.id.swipelayout);
+        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                myTodoAdapter.notifyDataSetChanged();
+                swipeRefreshLayout.setRefreshing(false);
+            }
+        });
 
         ServerApi serverApi = ApiProvider.getInstance().create(ServerApi.class);
 

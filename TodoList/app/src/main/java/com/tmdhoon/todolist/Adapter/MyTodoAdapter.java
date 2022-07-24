@@ -1,9 +1,11 @@
-package com.tmdhoon.todolist.Recyclerview;
+package com.tmdhoon.todolist.Adapter;
 
 import android.content.Intent;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -27,6 +29,7 @@ import retrofit2.Response;
 public class MyTodoAdapter extends RecyclerView.Adapter<MyTodoAdapter.MyTodoViewHolder> {
 
     private List<MyTodoResponse> arrayList;
+    private ServerApi serverApi;
 
     public MyTodoAdapter(List<MyTodoResponse> arrayList) {
         this.arrayList = arrayList;
@@ -37,6 +40,8 @@ public class MyTodoAdapter extends RecyclerView.Adapter<MyTodoAdapter.MyTodoView
         public TextView tvmyContent;
         public TextView tvmyTitle;
         public TextView tvmyCreated_at;
+        public TextView tvmySuccess;
+        public Button btSuccess;
         public ImageView ivedit;
         public ImageView ivdelete;
 
@@ -46,6 +51,8 @@ public class MyTodoAdapter extends RecyclerView.Adapter<MyTodoAdapter.MyTodoView
             tvmyContent = itemView.findViewById(R.id.tvmyContent);
             tvmyTitle = itemView.findViewById(R.id.tvmyTitle);
             tvmyCreated_at = itemView.findViewById(R.id.tvmyCreated_at);
+            tvmySuccess = itemView.findViewById(R.id.tvmySuccess);
+            btSuccess = itemView.findViewById(R.id.btSuccess);
             ivedit = itemView.findViewById(R.id.ivedit);
             ivdelete = itemView.findViewById(R.id.ivdelete);
         }
@@ -64,6 +71,8 @@ public class MyTodoAdapter extends RecyclerView.Adapter<MyTodoAdapter.MyTodoView
         holder.tvmyContent.setText(arrayList.get(position).getContent());
         holder.tvmyTitle.setText(arrayList.get(position).getTitle());
         holder.tvmyCreated_at.setText(arrayList.get(position).getCreated_at());
+        if(arrayList.get(position).getSuccess() == true) holder.tvmySuccess.setText("O");
+        else holder.tvmySuccess.setText("X");
 
         holder.ivedit.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -76,16 +85,36 @@ public class MyTodoAdapter extends RecyclerView.Adapter<MyTodoAdapter.MyTodoView
             }
         });
 
+        holder.btSuccess.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                serverApi = ApiProvider.getInstance().create(ServerApi.class);
+
+                serverApi.success(SignInActivity.AccessToken, arrayList.get(position).getId()).enqueue(new Callback<Void>() {
+                    @Override
+                    public void onResponse(Call<Void> call, Response<Void> response) {
+
+                    }
+
+                    @Override
+                    public void onFailure(Call<Void> call, Throwable t) {
+
+                    }
+                });
+            }
+        });
+
         holder.ivdelete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                ServerApi serverApi = ApiProvider.getInstance().create(ServerApi.class);
+                serverApi = ApiProvider.getInstance().create(ServerApi.class);
 
                 serverApi.delete(SignInActivity.AccessToken, arrayList.get(position).getId()).enqueue(new Callback<Void>() {
                     @Override
                     public void onResponse(Call<Void> call, Response<Void> response) {
                         if(response.isSuccessful()){
-                            Toast.makeText(view.getContext(), "성공적으로 삭제되었습니다", Toast.LENGTH_SHORT).show();
+                            arrayList.remove(position);
+                            notifyItemRemoved(position);
                         }
                     }
 

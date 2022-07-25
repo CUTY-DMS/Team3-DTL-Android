@@ -80,7 +80,9 @@ public class TodoAdapter extends RecyclerView.Adapter<TodoAdapter.TodoViewHolder
         holder.like.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                if(holder.like.getImageAlpha() == R.drawable.white){
+                    holder.like.setImageResource(R.drawable.red);
+                }
             }
         });
 

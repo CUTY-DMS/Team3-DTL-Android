@@ -1,5 +1,6 @@
 package com.tmdhoon.todolist.fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -11,6 +12,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import android.widget.Button;
 import android.widget.TextView;
 
 
@@ -56,12 +58,18 @@ public class MypageFragment extends Fragment {
 
         recyclerView.setAdapter(myTodoAdapter);
 
-        swipeRefreshLayout = rootView.findViewById(R.id.swipelayout);
-        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+        Button btLogout = rootView.findViewById(R.id.btLogout);
+
+        btLogout.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onRefresh() {
-                myTodoAdapter.notifyDataSetChanged();
-                swipeRefreshLayout.setRefreshing(false);
+            public void onClick(View view) {
+
+                SignInActivity.ideditor.putString("Id", "").commit();
+                SignInActivity.pweditor.putString("Pw", "").commit();
+                SignInActivity.checkeditor.putInt("Check", 0).commit();
+
+                Intent intent = new Intent(getActivity(), SignInActivity.class);
+                startActivity(intent);
             }
         });
 

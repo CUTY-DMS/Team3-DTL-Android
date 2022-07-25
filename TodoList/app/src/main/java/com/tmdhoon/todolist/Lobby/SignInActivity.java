@@ -2,26 +2,22 @@ package com.tmdhoon.todolist.Lobby;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.annotation.SuppressLint;
-import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.text.Editable;
-import android.text.InputType;
 import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.tmdhoon.todolist.Api.ApiProvider;
 import com.tmdhoon.todolist.Api.ServerApi;
-import com.tmdhoon.todolist.R;
 import com.tmdhoon.todolist.Request.SignInRequest;
 import com.tmdhoon.todolist.Response.SignInResponse;
 import com.tmdhoon.todolist.databinding.ActivitySigninBinding;
+
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -30,7 +26,14 @@ import retrofit2.Response;
 public class SignInActivity extends AppCompatActivity {
 
     private ActivitySigninBinding binding;
-    private ServerApi serverApi;
+
+    public static SharedPreferences id;
+    public static SharedPreferences pw;
+    public static SharedPreferences check;
+
+    public static SharedPreferences.Editor ideditor;
+    public static SharedPreferences.Editor pweditor;
+    public static SharedPreferences.Editor checkeditor;
 
     public static String AccessToken;
 
@@ -40,6 +43,53 @@ public class SignInActivity extends AppCompatActivity {
 
         binding = ActivitySigninBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+
+        id = getSharedPreferences("Id", MODE_PRIVATE);
+        pw = getSharedPreferences("Pw", MODE_PRIVATE);
+        check = getSharedPreferences("Check", MODE_PRIVATE);
+
+        ideditor = id.edit();
+        pweditor = pw.edit();
+        checkeditor = check.edit();
+
+        if(check.getInt("Check", 0) == 1){
+            binding.cbautoLogin.setChecked(true);
+
+            binding.etId.setText(id.getString("Id", ""));
+            binding.etPw.setText(pw.getString("Pw", ""));
+
+            Log.w("SignInActivity", "setText");
+
+            String userId = binding.etId.getText().toString();
+            String userPw = binding.etPw.getText().toString();
+
+            binding.tvidCount.setText(binding.etId.getText().length() + "/20");
+
+            SignInRequest signInRequest = new SignInRequest(userId, userPw);
+
+            Log.w("SignInActivity", "signinrequest");
+
+            ServerApi serverApi = ApiProvider.getInstance().create(ServerApi.class);
+
+            serverApi.signIn(signInRequest).enqueue(new Callback<SignInResponse>() {
+                @Override
+                public void onResponse(Call<SignInResponse> call, Response<SignInResponse> response) {
+                    if (response.isSuccessful()) {
+                        Toast.makeText(SignInActivity.this, "로그인에 성공했습니다!", Toast.LENGTH_SHORT).show();
+
+                        AccessToken = response.body().getToken();
+
+                        Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                        startActivity(intent);
+                        finish();
+                    }
+                }
+
+                @Override
+                public void onFailure(Call<SignInResponse> call, Throwable t) {
+                }
+            });
+        }else binding.cbautoLogin.setChecked(false);
 
         binding.etId.addTextChangedListener(new TextWatcher() {
             @Override
@@ -76,6 +126,7 @@ public class SignInActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Log.e("Test", "onClick");
+
                 signIn();
             }
         });
@@ -97,7 +148,7 @@ public class SignInActivity extends AppCompatActivity {
 
         SignInRequest signInRequest = new SignInRequest(userId, userPw);
 
-        serverApi = ApiProvider.getInstance().create(ServerApi.class);
+        ServerApi serverApi = ApiProvider.getInstance().create(ServerApi.class);
 
         serverApi.signIn(signInRequest).enqueue(new Callback<SignInResponse>() {
             @Override
@@ -106,6 +157,14 @@ public class SignInActivity extends AppCompatActivity {
                     Toast.makeText(SignInActivity.this, "로그인에 성공했습니다!", Toast.LENGTH_SHORT).show();
 
                     AccessToken = response.body().getToken();
+
+                    if(binding.cbautoLogin.isChecked()){
+                        int check = 1;
+                        checkeditor.putInt("Check", check);
+
+                        ideditor.putString("Id", userId);
+                        pweditor.putString("Pw", userPw);
+                    }
 
                     Intent intent = new Intent(getApplicationContext(), MainActivity.class);
                     startActivity(intent);
@@ -121,12 +180,5 @@ public class SignInActivity extends AppCompatActivity {
                 Toast.makeText(SignInActivity.this, "로그인에 실패했습니다", Toast.LENGTH_SHORT).show();
             }
         });
-    }
-
-    @Override
-    protected void onStop() {
-        super.onStop();
-
-
     }
 }

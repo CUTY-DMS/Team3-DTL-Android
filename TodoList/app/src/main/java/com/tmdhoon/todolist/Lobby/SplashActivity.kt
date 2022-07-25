@@ -4,6 +4,8 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
+import android.view.animation.Animation
+import com.tmdhoon.todolist.R
 import com.tmdhoon.todolist.databinding.ActivitySplashBinding
 
 class SplashActivity : AppCompatActivity() {

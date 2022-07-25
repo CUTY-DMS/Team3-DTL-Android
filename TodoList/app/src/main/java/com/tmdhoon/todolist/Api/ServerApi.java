@@ -5,12 +5,10 @@ import com.tmdhoon.todolist.Request.PostRequest;
 import com.tmdhoon.todolist.Request.SignInRequest;
 import com.tmdhoon.todolist.Response.MainResponse;
 import com.tmdhoon.todolist.Response.MyResponse;
-import com.tmdhoon.todolist.Response.MyTodoResponse;
 import com.tmdhoon.todolist.Response.SignInResponse;
 import com.tmdhoon.todolist.Request.SignUpRequest;
 import com.tmdhoon.todolist.Response.SignUpResponse;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import retrofit2.Call;

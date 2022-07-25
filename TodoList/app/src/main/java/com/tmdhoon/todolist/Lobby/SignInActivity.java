@@ -31,6 +31,11 @@ public class SignInActivity extends AppCompatActivity {
     public static SharedPreferences pw;
     public static SharedPreferences check;
 
+    private int check1;
+
+    private String userId;
+    private String userPw;
+
     public static SharedPreferences.Editor ideditor;
     public static SharedPreferences.Editor pweditor;
     public static SharedPreferences.Editor checkeditor;
@@ -55,19 +60,15 @@ public class SignInActivity extends AppCompatActivity {
         if(check.getInt("Check", 0) == 1){
             binding.cbautoLogin.setChecked(true);
 
-            binding.etId.setText(id.getString("Id", ""));
+            binding.etId.setText(id.getString("Id",""));
             binding.etPw.setText(pw.getString("Pw", ""));
 
-            Log.w("SignInActivity", "setText");
+            String userId = id.getString("Id","");
+            String userPw = pw.getString("Pw", "");
 
-            String userId = binding.etId.getText().toString();
-            String userPw = binding.etPw.getText().toString();
-
-            binding.tvidCount.setText(binding.etId.getText().length() + "/20");
+            binding.tvidCount.setText(id.getString("Id","").length() + "/20");
 
             SignInRequest signInRequest = new SignInRequest(userId, userPw);
-
-            Log.w("SignInActivity", "signinrequest");
 
             ServerApi serverApi = ApiProvider.getInstance().create(ServerApi.class);
 
@@ -78,6 +79,14 @@ public class SignInActivity extends AppCompatActivity {
                         Toast.makeText(SignInActivity.this, "로그인에 성공했습니다!", Toast.LENGTH_SHORT).show();
 
                         AccessToken = response.body().getToken();
+
+                        if(binding.cbautoLogin.isChecked()){
+                            check1 = 1;
+                            checkeditor.putInt("Check", check1);
+
+                            ideditor.putString("Id", userId).commit();
+                            pweditor.putString("Pw", userPw).commit();
+                        }
 
                         Intent intent = new Intent(getApplicationContext(), MainActivity.class);
                         startActivity(intent);
@@ -133,8 +142,8 @@ public class SignInActivity extends AppCompatActivity {
     }
 
     private void signIn(){
-        String userId = binding.etId.getText().toString();
-        String userPw = binding.etPw.getText().toString();
+        userId = binding.etId.getText().toString();
+        userPw = binding.etPw.getText().toString();
 
         if(userId.length() == 0) Toast.makeText(SignInActivity.this, "아이디를 입력해주세요", Toast.LENGTH_SHORT).show();
         else if(userPw.length() == 0) Toast.makeText(SignInActivity.this, "비밀번호를 입력해주세요", Toast.LENGTH_SHORT).show();
@@ -159,11 +168,11 @@ public class SignInActivity extends AppCompatActivity {
                     AccessToken = response.body().getToken();
 
                     if(binding.cbautoLogin.isChecked()){
-                        int check = 1;
-                        checkeditor.putInt("Check", check);
+                        check1 = 1;
+                        checkeditor.putInt("Check", check1);
 
-                        ideditor.putString("Id", userId);
-                        pweditor.putString("Pw", userPw);
+                        ideditor.putString("Id", userId).commit();
+                        pweditor.putString("Pw", userPw).commit();
                     }
 
                     Intent intent = new Intent(getApplicationContext(), MainActivity.class);

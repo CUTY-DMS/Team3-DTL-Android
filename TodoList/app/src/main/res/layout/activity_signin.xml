@@ -36,7 +36,8 @@
             android:layout_height="wrap_content"
             android:fontFamily="@font/dohyeon"
             android:hint="아이디"
-            android:maxLength="20"/>
+            android:maxLength="20"
+            android:singleLine="true"/>
 
 
     </com.google.android.material.textfield.TextInputLayout>
@@ -68,9 +69,10 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:fontFamily="@font/dohyeon"
+            android:inputType="textPassword"
             android:hint="비밀번호"
             android:maxLength="20"
-            android:inputType="textPassword"/>
+            android:singleLine="true"/>
 
 
     </com.google.android.material.textfield.TextInputLayout>

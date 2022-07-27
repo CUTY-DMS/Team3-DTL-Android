@@ -46,15 +46,6 @@ public class HomeFragment extends Fragment{
 
         recyclerView.setAdapter(todoAdapter);                                                       // 리사이클러뷰 어댑터 설정
 
-        swipeRefreshLayout = view.findViewById(R.id.swipelayout);                                   // swipelayout 연결
-        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {        // 새로고침 할 때
-            @Override
-            public void onRefresh() {
-
-                swipeRefreshLayout.setRefreshing(false);                                            // 새로고침 끝냄
-            }
-        });
-
         ServerApi serverApi = ApiProvider.getInstance().create(ServerApi.class);                    // 레트로핏 생성
 
         serverApi.main(SignInActivity.AccessToken).enqueue(new Callback<List<MainResponse>>() {     // 서버로부터 리스트 받음

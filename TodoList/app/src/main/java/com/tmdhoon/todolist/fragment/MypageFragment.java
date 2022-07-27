@@ -6,7 +6,6 @@ import android.os.Bundle;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -44,10 +43,6 @@ public class MypageFragment extends Fragment {
                              Bundle savedInstanceState) {
         ViewGroup rootView = (ViewGroup) inflater.inflate(R.layout.fragment_mypage, containter, false);
 
-        username = rootView.findViewById(R.id.tvuser_name);                                         // 아이디 연결
-        userid = rootView.findViewById(R.id.tvuser_id);
-        userage = rootView.findViewById(R.id.tvuser_age);
-
         todos = new ArrayList<>();                                                                  // mytodoresponse 값을 arraylist
         RecyclerView recyclerView = rootView.findViewById(R.id.myRecyclerView);                     // 리사이클러뷰 연결
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity());           // 리니어 레이아웃 매니저
@@ -81,11 +76,6 @@ public class MypageFragment extends Fragment {
             @Override
             public void onResponse(Call<MyResponse> call, Response<MyResponse> response) {          // 응답 성공
                 if (response.isSuccessful()) {                                                      // 응답 코드가 성공이 경우
-                   
-                    username.setText(response.body().getUser_name());                               // 내 이름 띄우고
-                    userid.setText(response.body().getUser_id());                                   // 내 아이디 띄우고
-                    userage.setText(String.valueOf(response.body().getUser_age()));                 // 내 나이 띄움
-
                     todos.addAll(response.body().getArrayList());                                   // 내가 작성한 투두 arraylist 에 추가
                     myTodoAdapter.notifyDataSetChanged();                                           // 리사이클러뷰 새로고침
                 }

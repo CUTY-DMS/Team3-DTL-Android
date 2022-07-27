@@ -110,7 +110,7 @@
         android:id="@+id/bteditDelete"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="삭제"
+        android:text="초기화"
         android:layout_marginRight="4dp"
         android:backgroundTint="#AA0000"
         app:layout_constraintRight_toRightOf="parent"

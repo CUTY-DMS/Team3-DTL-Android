@@ -23,7 +23,7 @@ public class MainActivity extends AppCompatActivity {
 
     private HomeFragment homeFragment = new HomeFragment();                                         // 홈 프래그먼트
     private PostFragment postFragment = new PostFragment();                                         // 검색 프래그먼트
-    private MypageFragment mypageFragment = new MypageFragment();                                   // 마이페이지 프래그먼트
+    private MypageFragment mypageNewFragment = new MypageFragment();                                   // 마이페이지 프래그먼트
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,7 +53,7 @@ public class MainActivity extends AppCompatActivity {
                         break;
 
                     case R.id.menu_mypage:                                                          // 마이페이지 프래그먼트
-                        transaction.replace(R.id.framelayout, mypageFragment).commitAllowingStateLoss();
+                        transaction.replace(R.id.framelayout, mypageNewFragment).commitAllowingStateLoss();
                         break;
                 }
                 return true;

@@ -1,5 +1,6 @@
 package com.tmdhoon.todolist.Adapter;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -11,6 +12,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.tmdhoon.todolist.Api.ApiProvider;
@@ -106,22 +108,42 @@ public class MyTodoAdapter extends RecyclerView.Adapter<MyTodoAdapter.MyTodoView
         holder.ivdelete.setOnClickListener(new View.OnClickListener() {                             // 삭제 버튼을 눌렀을때
             @Override
             public void onClick(View view) {
-                ServerApi serverApi = ApiProvider.getInstance().create(ServerApi.class);
+                AlertDialog.Builder builder = new AlertDialog.Builder(view.getContext());
 
-                serverApi.delete(SignInActivity.AccessToken, list.get(position).getId()).enqueue(new Callback<Void>() { // 유저 토큰과 게시글 아이디를 보냄
-                    @Override
-                    public void onResponse(Call<Void> call, Response<Void> response) {
-                        if(response.isSuccessful()){                                                // 응답 성공인 경우
-                            list.remove(position);                                                  // 해당 포지션의 리스트를 삭제
-                            notifyItemRemoved(position);                                            // 리사이클러뷰 새로고침
-                        }
-                    }
+                builder.setTitle("삭제");
+                builder.setMessage("정말 삭제하시겠습니까?");
 
+                builder.setPositiveButton("예", new DialogInterface.OnClickListener() {
                     @Override
-                    public void onFailure(Call<Void> call, Throwable t) {
-                        Toast.makeText(view.getContext(), "관리자에게 문의해주세요", Toast.LENGTH_SHORT).show();
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        ServerApi serverApi = ApiProvider.getInstance().create(ServerApi.class);
+
+                        serverApi.delete(SignInActivity.AccessToken, list.get(position).getId()).enqueue(new Callback<Void>() { // 유저 토큰과 게시글 아이디를 보냄
+                            @Override
+                            public void onResponse(Call<Void> call, Response<Void> response) {
+                                if(response.isSuccessful()){                                                // 응답 성공인 경우
+                                    list.remove(position);                                                  // 해당 포지션의 리스트를 삭제
+                                    notifyItemRemoved(position);                                            // 리사이클러뷰 새로고침
+                                    Toast.makeText(view.getContext(), "삭제되었습니다!", Toast.LENGTH_SHORT).show();
+                                }
+                            }
+
+                            @Override
+                            public void onFailure(Call<Void> call, Throwable t) {
+                                Toast.makeText(view.getContext(), "관리자에게 문의해주세요", Toast.LENGTH_SHORT).show();
+                            }
+                        });
                     }
                 });
+
+                builder.setNegativeButton("아니오", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+
+                    }
+                });
+                AlertDialog dialog = builder.create();
+                dialog.show();
             }
         });
 

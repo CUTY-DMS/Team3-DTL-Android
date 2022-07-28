@@ -72,8 +72,8 @@ public class MyTodoAdapter extends RecyclerView.Adapter<MyTodoAdapter.MyTodoView
         holder.tvmyContent.setText(list.get(position).getContent());                                // 내용 띄움
         holder.tvmyTitle.setText(list.get(position).getTitle());                                    // 제목 띄움
         holder.tvmyCreated_at.setText(list.get(position).getCreated_at());                          // 만든 날짜 띄움
-        if(list.get(position).getSuccess() == true) holder.tvmySuccess.setText("O");                // boolean형의 성공 여부가 true 일 경우 O
-        else holder.tvmySuccess.setText("X");                                                       // 그렇지 않으면 X
+        if(list.get(position).getSuccess() == true) holder.tvmySuccess.setText("✔");                // boolean형의 성공 여부가 true 일 경우 O
+        else holder.tvmySuccess.setText("❌");                                                       // 그렇지 않으면 X
 
         holder.ivedit.setOnClickListener(new View.OnClickListener() {                               // 수정 버튼을 눌렀을때
             @Override
@@ -124,7 +124,7 @@ public class MyTodoAdapter extends RecyclerView.Adapter<MyTodoAdapter.MyTodoView
                                 if(response.isSuccessful()){                                                // 응답 성공인 경우
                                     list.remove(position);                                                  // 해당 포지션의 리스트를 삭제
                                     notifyItemRemoved(position);                                            // 리사이클러뷰 새로고침
-                                    Toast.makeText(view.getContext(), "삭제되었습니다!", Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(view.getContext(), "삭제되었습니다!", 100).show();
                                 }
                             }
 

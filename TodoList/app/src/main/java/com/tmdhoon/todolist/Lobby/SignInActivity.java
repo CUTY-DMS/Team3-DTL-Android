@@ -116,9 +116,7 @@ public class SignInActivity extends AppCompatActivity {
                     AccessToken = response.body().getToken();                                       // 토큰을 받음
 
                     if(binding.cbautoLogin.isChecked()){                                            // 만약 자동 로그인이 체크되어있는경우
-                        int check1 = 1;                                                             // check1 변수에 1을 저장
-                        editor.putInt("Check", check1).commit();                                 // check1 변수를 앱 내부에 저장
-
+                        editor.putInt("Check", 1).commit();                                    // check1 변수를 앱 내부에 저장
                         editor.putString("Id", userId).commit();                                 // Id 값을 앱 내부에 저장
                         editor.putString("Pw", userPw).commit();                                 // Pw 값을 앱 내부에 저장
                     }
@@ -164,8 +162,7 @@ public class SignInActivity extends AppCompatActivity {
                     AccessToken = response.body().getToken();                                       // 토큰을 받음
 
                     if (binding.cbautoLogin.isChecked()) {                                          // 로그인 유지가 체크되어있다면
-                        int check1 = 1;                                                             // check1 변수를 1로 설정
-                        editor.putInt("Check", check1).commit();                                 // check1 변수를 앱 내부에 저장
+                        editor.putInt("Check", 1).commit();                                 // check1 변수를 앱 내부에 저장
                         editor.putString("Id", userId).commit();                                 // 아이디 값을 앱 내부에 저장
                         editor.putString("Pw", userPw).commit();                                 // 비밀번호 값을 내부에 저장
                     }

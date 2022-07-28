@@ -6,10 +6,10 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".fragment.MypageFragment">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/constraint3"
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardView2"
         android:layout_width="match_parent"
-        android:layout_height="56dp"
+        android:layout_height="96dp"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent">
@@ -18,84 +18,107 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="수정"
-            android:textSize="28sp"
+            android:textSize="40sp"
             android:textColor="@color/black"
             android:fontFamily="@font/dohyeon"
-            android:layout_marginLeft="16dp"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"/>
+            android:layout_marginTop="32dp"
+            android:layout_marginLeft="32dp"/>
 
         <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
-            android:layout_height="1dp"
-            app:cardBackgroundColor="@color/black"
-            app:layout_constraintLeft_toRightOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"/>
+            android:layout_height="1.2dp"
+            android:layout_gravity="bottom"
+            android:backgroundTint="@color/gray"/>
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.cardview.widget.CardView>
 
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/layouteteditlTitle"
-        android:layout_width="match_parent"
-        android:layout_height="64dp"
-        android:textColorHint="@color/white"
-        app:layout_constraintTop_toBottomOf="@id/constraint3">
-
-        <androidx.appcompat.widget.AppCompatEditText
-            android:id="@+id/eteditTitle"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:hint="제목"
-            android:maxLength="20"
-            android:singleLine="true"
-            android:background="@color/white"/>
-
-    </com.google.android.material.textfield.TextInputLayout>
-
-    <TextView
-        android:id="@+id/tvedittitleCount"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="0/20"
-        android:textColor="@color/black"
-        android:layout_marginTop="8dp"
-        android:layout_marginRight="8dp"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="@id/layouteteditlTitle"/>
-
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/layouteteditContent"
-        android:layout_width="match_parent"
+    <androidx.cardview.widget.CardView
+        android:layout_width="360dp"
         android:layout_height="0dp"
-        android:textColorHint="@color/white"
+        android:layout_marginTop="16dp"
+        app:cardCornerRadius="12dp"
         app:layout_constraintBottom_toTopOf="@+id/bteditPost"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/layouteteditlTitle">
-
-        <androidx.appcompat.widget.AppCompatEditText
-            android:id="@+id/eteditContent"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@color/white"
-            android:gravity="top"
-            android:hint="내용"
-            android:maxLength="100" />
-
-    </com.google.android.material.textfield.TextInputLayout>
-
-    <TextView
-        android:id="@+id/tveditcontentCount"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="0/100"
-        android:textColor="@color/black"
-        android:layout_marginTop="8dp"
-        android:layout_marginRight="8dp"
+        app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="@id/layouteteditContent"/>
+        app:layout_constraintTop_toBottomOf="@id/cardView2">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/constraint"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/layouteteditTitle"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="320dp"
+                android:layout_height="64dp"
+                android:layout_marginTop="24dp"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="@id/constraint">
+
+                <androidx.appcompat.widget.AppCompatEditText
+                    android:id="@+id/eteditTitle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/dohyeon"
+                    android:hint="제목"
+                    android:maxLength="20"/>
+
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/layouteteditContent"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="320dp"
+                android:layout_height="0dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="24dp"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/layouteteditTitle"
+                app:layout_constraintBottom_toBottomOf="@id/constraint">
+
+                <androidx.appcompat.widget.AppCompatEditText
+                    android:id="@+id/eteditContent"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:fontFamily="@font/dohyeon"
+                    android:hint="내용"
+                    android:gravity="top"
+                    android:maxLength="100" />
+
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <TextView
+                android:id="@+id/tvedittitleCount"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:layout_marginRight="8dp"
+                android:text="0/20"
+                android:textColor="@color/black"
+                app:layout_constraintTop_toTopOf="@id/layouteteditTitle"
+                app:layout_constraintRight_toRightOf="@id/layouteteditTitle" />
+
+            <TextView
+                android:id="@+id/tveditcontentCount"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:layout_marginRight="8dp"
+                android:text="0/100"
+                android:textColor="@color/black"
+                app:layout_constraintTop_toTopOf="@id/layouteteditContent"
+                app:layout_constraintRight_toRightOf="@id/layouteteditContent" />
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+    </androidx.cardview.widget.CardView>
 
     <Button
         android:id="@+id/bteditPost"

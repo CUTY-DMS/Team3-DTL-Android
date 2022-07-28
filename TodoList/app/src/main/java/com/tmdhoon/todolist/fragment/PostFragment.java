@@ -156,6 +156,8 @@ public class PostFragment extends Fragment {
                     Toast.makeText(getContext(), "글이 정상적으로 등록되었습니다", Toast.LENGTH_SHORT).show(); // 메시지
                     etTitle.setText("");                                                            // 입력란 초기화
                     etContent.setText("");
+
+                    etTitle.requestFocus();
                 }
             }
 

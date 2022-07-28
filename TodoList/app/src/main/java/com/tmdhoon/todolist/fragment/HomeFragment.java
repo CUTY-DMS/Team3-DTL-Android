@@ -1,5 +1,7 @@
 package com.tmdhoon.todolist.fragment;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -30,12 +32,12 @@ public class HomeFragment extends Fragment{
     private RecyclerView recyclerView;                                                              // 리사이클러뷰
     private LinearLayoutManager linearLayoutManager;                                                // 리니어 레이아웃 매니저
     private TodoAdapter todoAdapter;                                                                // 리사이클러뷰 어댑터
-    private SwipeRefreshLayout swipeRefreshLayout;                                                  // 당겨서 새로고침
     List<MainResponse> mainResponseList;                                                            // todolist
 
     public View onCreateView(LayoutInflater inflater, ViewGroup containter,
                              Bundle savedInstanceState){
         View view = inflater.inflate(R.layout.fragment_home, containter, false);
+
 
         mainResponseList = new ArrayList<>();                                                       // todoresponse를 arraylist에 담음
         recyclerView = view.findViewById(R.id.recyclerview);                                        // 리사이클러뷰 연결
@@ -52,7 +54,7 @@ public class HomeFragment extends Fragment{
             @Override
             public void onResponse(Call<List<MainResponse>> call, Response<List<MainResponse>> response) {
                 mainResponseList.addAll(response.body());                                           // 서버로부터 받은 값을 리스트에 모두 추가
-                todoAdapter.notifyDataSetChanged();                                                 // 리사이클러뷰 새로고침
+                todoAdapter.notifyDataSetChanged();                                                 // 리사이클러뷰 새로고침3
             }
 
             @Override

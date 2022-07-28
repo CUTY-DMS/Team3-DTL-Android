@@ -12,6 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -19,6 +20,7 @@ import android.widget.Toast;
 import com.tmdhoon.todolist.Api.ApiProvider;
 import com.tmdhoon.todolist.Api.ServerApi;
 import com.tmdhoon.todolist.Lobby.SignInActivity;
+import com.tmdhoon.todolist.MypageActivity;
 import com.tmdhoon.todolist.R;
 import com.tmdhoon.todolist.Adapter.MyTodoAdapter;
 import com.tmdhoon.todolist.Response.MyResponse;
@@ -33,11 +35,10 @@ import retrofit2.Response;
 
 public class MypageFragment extends Fragment {
 
-    private TextView username;
-    private TextView userid;
-    private TextView userage;
     private ArrayList<MyTodoResponse> todos;                                                        // arraylist 에 mytodoresponse 값 담음
     private MyTodoAdapter myTodoAdapter;                                                            // mytodoadapter
+
+    private ImageView ivmyPage;
 
     public View onCreateView(LayoutInflater inflater, ViewGroup containter,
                              Bundle savedInstanceState) {
@@ -52,20 +53,13 @@ public class MypageFragment extends Fragment {
 
         recyclerView.setAdapter(myTodoAdapter);                                                     // 어댑터 설정
 
-        Button btLogout = rootView.findViewById(R.id.btLogout);                                     // 버튼 아이디 연결
+        ivmyPage = rootView.findViewById(R.id.ivmyPage);
 
-        btLogout.setOnClickListener(new View.OnClickListener() {                                    // 로그아웃 버튼 눌렀을때
+        ivmyPage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
-                SignInActivity.editor.putString("Id", "").commit();                           // 로그인 액티비티에서 만든 sharedpreferences Id 값을 날림
-                SignInActivity.editor.putString("Pw", "").commit();                           // Pw 값 날림
-                SignInActivity.editor.putInt("Check", 0).commit();                             // 체크 날림
-
-                Intent intent = new Intent(getActivity(), SignInActivity.class);                    // 로그인 화면으로 넘어감
+                Intent intent = new Intent(getActivity(), MypageActivity.class);
                 startActivity(intent);
-
-                Toast.makeText(getActivity(), "로그아웃 되었습니다!", Toast.LENGTH_SHORT).show();  // 메시지
             }
         });
 

@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.accessibility.AccessibilityManager;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -36,6 +37,9 @@ public class TodoAdapter extends RecyclerView.Adapter<TodoAdapter.TodoViewHolder
 
     private SharedPreferences preferences;
     private SharedPreferences.Editor editor;
+
+    private String id;
+
 
     public class TodoViewHolder extends RecyclerView.ViewHolder {                                   // myrecyclerview 에서 만든 객체를 어댑터와 연결
 
@@ -72,6 +76,8 @@ public class TodoAdapter extends RecyclerView.Adapter<TodoAdapter.TodoViewHolder
         preferences = view.getContext().getSharedPreferences("UserLike", Context.MODE_PRIVATE);
         editor = preferences.edit();
 
+        id = SignInActivity.preferences.getString("Id", "");
+
         return new TodoViewHolder(view);                                                            // todoviewholder 리턴
     }
 
@@ -86,9 +92,9 @@ public class TodoAdapter extends RecyclerView.Adapter<TodoAdapter.TodoViewHolder
         holder.member_id.setText(list.get(position).getMember_id());
         holder.like_count.setText(String.valueOf(list.get(position).getLike_count()));
 
-        if(preferences.getInt("Like" + list.get(position).getId(), 0) == 1){
+        if(preferences.getInt("Like" + id + list.get(position).getId(), 0) == 1){
             holder.like.setImageResource(R.drawable.red);
-        }else if(preferences.getInt("Like" + list.get(position).getId(), 0) == 0){
+        }else if(preferences.getInt("Like" + id + list.get(position).getId(), 0) == 0){
             holder.like.setImageResource(R.drawable.white);
         }
 
@@ -119,13 +125,13 @@ public class TodoAdapter extends RecyclerView.Adapter<TodoAdapter.TodoViewHolder
                 serverApi.like(SignInActivity.AccessToken, list.get(position).getId()).enqueue(new Callback<Void>() {
                     @Override
                     public void onResponse(Call<Void> call, Response<Void> response) {
-                        if(preferences.getInt("Like" + list.get(position).getId(), 0) == 1){
+                        if(preferences.getInt("Like" + id + list.get(position).getId(), 0) == 1){
                             holder.like.setImageResource(R.drawable.white);
-                            editor.putInt("Like" + list.get(position).getId(), 0).commit();
+                            editor.putInt("Like" + id + list.get(position).getId(), 0).commit();
                         }
-                        else if(preferences.getInt("Like" + list.get(position).getId(), 0) == 0){
+                        else if(preferences.getInt("Like" + id + list.get(position).getId(), 0) == 0){
                             holder.like.setImageResource(R.drawable.red);
-                            editor.putInt("Like" + list.get(position).getId(), 1).commit();
+                            editor.putInt("Like" + id + list.get(position).getId(), 1).commit();
                         }
 
                     }
@@ -134,10 +140,8 @@ public class TodoAdapter extends RecyclerView.Adapter<TodoAdapter.TodoViewHolder
 
                     }
                 });
-
             }
         });
-
     }
 
     @Override

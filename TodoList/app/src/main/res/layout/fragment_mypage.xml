@@ -17,21 +17,29 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="마이페이지"
+            android:text="내 글"
             android:textSize="40sp"
             android:textColor="@color/black"
             android:fontFamily="@font/dohyeon"
             android:layout_marginTop="32dp"
             android:layout_marginLeft="32dp"/>
 
-        <Button
-            android:id="@+id/btLogout"
+        <ImageView
+            android:id="@+id/ivmyPage"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginTop="28dp"
+            android:layout_marginRight="28dp"
+            android:src="@drawable/ic_baseline_person_24"
+            android:layout_gravity="right"/>
+
+        <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="로그아웃"
-            android:fontFamily="@font/dohyeon"
-            android:layout_marginTop="26dp"
-            android:layout_marginRight="26dp"
+            android:text="내 정보"
+            android:textColor="@color/black"
+            android:layout_marginTop="64dp"
+            android:layout_marginRight="28dp"
             android:layout_gravity="right"/>
 
     </androidx.cardview.widget.CardView>

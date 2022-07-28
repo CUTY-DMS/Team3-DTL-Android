@@ -128,14 +128,14 @@ public class PostFragment extends Fragment {
     }
 
     public void postCheck() {
-        String title = etTitle.getText().toString();                                                 // 제목 얻어옴
-        String content = etContent.getText().toString();                                             // 내용 얻어옴
+        String title = etTitle.getText().toString();                                                // 제목 얻어옴
+        String content = etContent.getText().toString();                                            // 내용 얻어옴
 
-        if (title.length() == 0) {                                                                     // 제목 길이가 0인 경우
-            Toast.makeText(getContext(), "제목을 입력해주세요", Toast.LENGTH_SHORT).show();         // 메시지
+        if (title.length() == 0) {                                                                  // 제목 길이가 0인 경우
+            Toast.makeText(getContext(), "제목을 입력해주세요", Toast.LENGTH_SHORT).show();        // 메시지
         }
-        if (content.length() == 0) {                                                                   // 내용 길이가 0인 경우
-            Toast.makeText(getContext(), "내용을 작성해주세요", Toast.LENGTH_SHORT).show();         // 메시지
+        if (content.length() == 0) {                                                                // 내용 길이가 0인 경우
+            Toast.makeText(getContext(), "내용을 작성해주세요", Toast.LENGTH_SHORT).show();        // 메시지
         } else
             post();                                                                                 // 둘 다 아닌 경우 post 메서드 호출
 
@@ -149,9 +149,9 @@ public class PostFragment extends Fragment {
 
         ServerApi serverApi = ApiProvider.getInstance().create(ServerApi.class);                     // 레트로핏 가져와서
 
-        serverApi.post(SignInActivity.AccessToken, postRequest).enqueue(new Callback<PostRequest>() {// 서버와 통신
+        serverApi.post(SignInActivity.AccessToken, postRequest).enqueue(new Callback<Void>() {      // 서버와 통신
             @Override
-            public void onResponse(Call<PostRequest> call, Response<PostRequest> response) {         // 응답 성공
+            public void onResponse(Call<Void> call, Response<Void> response) {                      // 응답 성공
                 if (response.isSuccessful()) {
                     Toast.makeText(getContext(), "글이 정상적으로 등록되었습니다", Toast.LENGTH_SHORT).show(); // 메시지
                     etTitle.setText("");                                                            // 입력란 초기화
@@ -162,7 +162,7 @@ public class PostFragment extends Fragment {
             }
 
             @Override
-            public void onFailure(Call<PostRequest> call, Throwable t) {                             // 응답 실패
+            public void onFailure(Call<Void> call, Throwable t) {                                   // 응답 실패
                 Toast.makeText(getContext(), "글 등록에 실패하였습니다", Toast.LENGTH_SHORT).show(); // 메시지
             }
         });

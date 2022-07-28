@@ -13,6 +13,9 @@
         android:theme="@style/Theme.TodoList.Splash"
         android:usesCleartextTraffic="true">
         <activity
+            android:name=".MypageActivity"
+            android:exported="false" />
+        <activity
             android:name=".Lobby.MyDetailActivity"
             android:exported="false" />
         <activity

@@ -34,7 +34,7 @@ public interface ServerApi {
     );
 
     @POST("post")                                                                                   // 게시글 작성
-    Call<PostRequest> post(
+    Call<Void> post(
             @Header("AccessToken") String token,
             @Body PostRequest postRequest
     );

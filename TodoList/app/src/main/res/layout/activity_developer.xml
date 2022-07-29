@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".DeveloperActivity">
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/developers"
+        android:layout_width="match_parent"
+        android:layout_height="96dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Developers"
+            android:textSize="40sp"
+            android:textColor="@color/black"
+            android:fontFamily="@font/dohyeon"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="32dp"/>
+
+    </androidx.cardview.widget.CardView>
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/android"
+        android:layout_width="104dp"
+        android:layout_height="104dp"
+        android:src="@drawable/android"
+        android:layout_marginTop="128dp"
+        android:layout_marginLeft="64dp"
+        app:civ_border_width="1dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/developers"/>
+
+    <TextView
+        android:id="@+id/tvandroidName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="정승훈"
+        android:textSize="16sp"
+        android:textColor="@color/black"
+        android:layout_marginTop="4dp"
+        app:layout_constraintLeft_toLeftOf="@id/android"
+        app:layout_constraintRight_toRightOf="@id/android"
+        app:layout_constraintTop_toBottomOf="@id/android"/>
+
+    <TextView
+        android:id="@+id/tvandroid"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="안드로이드"
+        android:textSize="12sp"
+        android:textColor="@color/black"
+        android:layout_marginTop="4dp"
+        app:layout_constraintLeft_toLeftOf="@id/tvandroidName"
+        app:layout_constraintRight_toRightOf="@id/tvandroidName"
+        app:layout_constraintTop_toBottomOf="@id/tvandroidName"/>
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/front"
+        android:layout_width="104dp"
+        android:layout_height="104dp"
+        android:src="@drawable/front"
+        android:layout_marginTop="128dp"
+        android:layout_marginRight="64dp"
+        app:civ_border_width="1dp"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/developers"/>
+
+    <TextView
+        android:id="@+id/tvfrontName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="강지인"
+        android:textSize="16sp"
+        android:textColor="@color/black"
+        android:layout_marginTop="4dp"
+        app:layout_constraintLeft_toLeftOf="@id/front"
+        app:layout_constraintRight_toRightOf="@id/front"
+        app:layout_constraintTop_toBottomOf="@id/front"/>
+
+    <TextView
+        android:id="@+id/tvfront"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="프론트엔드"
+        android:textSize="12sp"
+        android:textColor="@color/black"
+        android:layout_marginTop="4dp"
+        app:layout_constraintLeft_toLeftOf="@id/tvfrontName"
+        app:layout_constraintRight_toRightOf="@id/tvfrontName"
+        app:layout_constraintTop_toBottomOf="@id/tvfrontName"/>
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/ios"
+        android:layout_width="104dp"
+        android:layout_height="104dp"
+        android:src="@drawable/ios"
+        app:civ_border_width="1dp"
+        android:layout_marginTop="64dp"
+        app:layout_constraintEnd_toEndOf="@+id/tvandroid"
+        app:layout_constraintStart_toStartOf="@+id/tvandroid"
+        app:layout_constraintTop_toBottomOf="@id/tvandroid" />
+
+    <TextView
+        android:id="@+id/tviosName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="강인혜"
+        android:textSize="16sp"
+        android:textColor="@color/black"
+        android:layout_marginTop="4dp"
+        app:layout_constraintLeft_toLeftOf="@id/ios"
+        app:layout_constraintRight_toRightOf="@id/ios"
+        app:layout_constraintTop_toBottomOf="@id/ios"/>
+
+    <TextView
+        android:id="@+id/tvios"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="IOS"
+        android:textSize="12sp"
+        android:textColor="@color/black"
+        android:layout_marginTop="4dp"
+        app:layout_constraintLeft_toLeftOf="@id/tviosName"
+        app:layout_constraintRight_toRightOf="@id/tviosName"
+        app:layout_constraintTop_toBottomOf="@id/tviosName"/>
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/back"
+        android:layout_width="104dp"
+        android:layout_height="104dp"
+        android:src="@drawable/back"
+        app:civ_border_width="1dp"
+        android:layout_marginTop="64dp"
+        app:layout_constraintEnd_toEndOf="@+id/tvfront"
+        app:layout_constraintStart_toStartOf="@+id/tvfront"
+        app:layout_constraintTop_toBottomOf="@+id/tvfront" />
+
+    <TextView
+        android:id="@+id/tvbackName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="이하성"
+        android:textSize="16sp"
+        android:textColor="@color/black"
+        android:layout_marginTop="4dp"
+        app:layout_constraintLeft_toLeftOf="@id/back"
+        app:layout_constraintRight_toRightOf="@id/back"
+        app:layout_constraintTop_toBottomOf="@id/back"/>
+
+    <TextView
+        android:id="@+id/tvback"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="백엔드"
+        android:textSize="12sp"
+        android:textColor="@color/black"
+        android:layout_marginTop="4dp"
+        app:layout_constraintLeft_toLeftOf="@id/tvbackName"
+        app:layout_constraintRight_toRightOf="@id/tvbackName"
+        app:layout_constraintTop_toBottomOf="@id/tvbackName"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

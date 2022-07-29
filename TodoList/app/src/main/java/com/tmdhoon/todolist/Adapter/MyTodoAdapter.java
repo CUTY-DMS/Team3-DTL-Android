@@ -37,24 +37,24 @@ public class MyTodoAdapter extends RecyclerView.Adapter<MyTodoAdapter.MyTodoView
 
     public class MyTodoViewHolder extends RecyclerView.ViewHolder {
 
-        public TextView tvmyContent;
-        public TextView tvmyTitle;
-        public TextView tvmyCreated_at;
-        public TextView tvmySuccess;
+        public TextView myContent;
+        public TextView myTitle;
+        public TextView myCreated_at;
+        public ImageView mySuccess;
         public Button btSuccess;
-        public ImageView ivedit;
-        public ImageView ivdelete;
+        public ImageView edit;
+        public ImageView delete;
 
         public MyTodoViewHolder(@NonNull View itemView) {
             super(itemView);
 
-            tvmyContent = itemView.findViewById(R.id.tvmyContent);
-            tvmyTitle = itemView.findViewById(R.id.tvmyTitle);
-            tvmyCreated_at = itemView.findViewById(R.id.tvmyCreated_at);
-            tvmySuccess = itemView.findViewById(R.id.tvmySuccess);
+            myContent = itemView.findViewById(R.id.tvmyContent);
+            myTitle = itemView.findViewById(R.id.tvmyTitle);
+            myCreated_at = itemView.findViewById(R.id.tvmyCreated_at);
+            mySuccess = itemView.findViewById(R.id.ivmySuccess);
             btSuccess = itemView.findViewById(R.id.btSuccess);
-            ivedit = itemView.findViewById(R.id.ivedit);
-            ivdelete = itemView.findViewById(R.id.ivdelete);
+            edit = itemView.findViewById(R.id.ivedit);
+            delete = itemView.findViewById(R.id.ivdelete);
         }
     }
 
@@ -69,13 +69,13 @@ public class MyTodoAdapter extends RecyclerView.Adapter<MyTodoAdapter.MyTodoView
 
     @Override
     public void onBindViewHolder(@NonNull MyTodoAdapter.MyTodoViewHolder holder, int position) {
-        holder.tvmyContent.setText(list.get(position).getContent());
-        holder.tvmyTitle.setText(list.get(position).getTitle());
-        holder.tvmyCreated_at.setText(list.get(position).getCreated_at());
-        if (list.get(position).getSuccess() == true) holder.tvmySuccess.setText("✔");
-        else holder.tvmySuccess.setText("❌");
+        holder.myContent.setText(list.get(position).getContent());
+        holder.myTitle.setText(list.get(position).getTitle());
+        holder.myCreated_at.setText(list.get(position).getCreated_at());
+        if (list.get(position).getSuccess() == true) holder.mySuccess.setImageResource(R.drawable.correct);
+        else holder.mySuccess.setImageResource(R.drawable.incorrect);
 
-        holder.ivedit.setOnClickListener(new View.OnClickListener() {
+        holder.edit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(view.getContext(), EditActivity.class);
@@ -105,7 +105,7 @@ public class MyTodoAdapter extends RecyclerView.Adapter<MyTodoAdapter.MyTodoView
             }
         });
 
-        holder.ivdelete.setOnClickListener(new View.OnClickListener() {
+        holder.delete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 AlertDialog.Builder builder = new AlertDialog.Builder(view.getContext());

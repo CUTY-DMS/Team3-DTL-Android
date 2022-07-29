@@ -70,17 +70,14 @@
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintBottom_toBottomOf="@+id/ivedit" />
 
-            <TextView
-                android:id="@+id/tvmySuccess"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/dohyeon"
-                android:text="O"
-                android:textColor="@color/black"
+            <ImageView
+                android:id="@+id/ivmySuccess"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
                 android:layout_marginRight="8dp"
-                app:layout_constraintTop_toTopOf="@+id/ivedit"
+                app:layout_constraintTop_toTopOf="@id/ivedit"
                 app:layout_constraintRight_toLeftOf="@id/ivedit"
-                app:layout_constraintBottom_toBottomOf="@+id/ivedit"/>
+                app:layout_constraintBottom_toBottomOf="@id/ivedit"/>
 
             <ImageView
                 android:id="@+id/ivdelete"

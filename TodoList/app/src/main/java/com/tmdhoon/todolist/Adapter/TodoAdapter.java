@@ -48,7 +48,7 @@ public class TodoAdapter extends RecyclerView.Adapter<TodoAdapter.TodoViewHolder
         public TextView created_at;
         public TextView member_id;
         public TextView like_count;
-        public TextView todo_success;
+        public ImageView todo_success;
         public ImageView like;
 
         public TodoViewHolder(View view) {
@@ -58,7 +58,7 @@ public class TodoAdapter extends RecyclerView.Adapter<TodoAdapter.TodoViewHolder
             created_at = view.findViewById(R.id.tvcreated_at);
             member_id = view.findViewById(R.id.tvmember_id);
             like_count = view.findViewById(R.id.tvlike_count);
-            todo_success = view.findViewById(R.id.tvsuccess);
+            todo_success = view.findViewById(R.id.ivSuccess);
             like = view.findViewById(R.id.ivLike);
         }
     }
@@ -97,8 +97,8 @@ public class TodoAdapter extends RecyclerView.Adapter<TodoAdapter.TodoViewHolder
             holder.like.setImageResource(R.drawable.white);
         }
 
-        if (list.get(position).getTodo_success() == true) holder.todo_success.setText("✔");
-        else holder.todo_success.setText("❌");
+        if (list.get(position).getTodo_success() == true) holder.todo_success.setImageResource(R.drawable.correct);
+        else holder.todo_success.setImageResource(R.drawable.incorrect);
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

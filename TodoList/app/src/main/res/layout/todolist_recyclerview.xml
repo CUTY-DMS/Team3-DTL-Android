@@ -86,24 +86,24 @@
 
            <ImageView
                android:id="@+id/ivLike"
-               android:layout_width="20dp"
-               android:layout_height="20dp"
+               android:layout_width="24dp"
+               android:layout_height="24dp"
                android:layout_marginRight="16dp"
+               android:src="@drawable/red"
                app:layout_constraintBottom_toBottomOf="@+id/tvlike_count"
                app:layout_constraintEnd_toStartOf="@+id/tvlike_count"
                app:layout_constraintTop_toTopOf="@+id/tvlike_count" />
 
-           <TextView
-               android:id="@+id/tvsuccess"
-               android:layout_width="wrap_content"
-               android:layout_height="wrap_content"
+           <ImageView
+               android:id="@+id/ivSuccess"
+               android:layout_width="24dp"
+               android:layout_height="24dp"
+               android:src="@drawable/correct"
+               android:background="@color/white"
                android:layout_marginRight="16dp"
-               android:fontFamily="@font/dohyeon"
-               android:text=""
-               android:textColor="@color/black"
-               app:layout_constraintBottom_toBottomOf="@+id/ivLike"
-               app:layout_constraintEnd_toStartOf="@+id/ivLike"
-               app:layout_constraintTop_toTopOf="@+id/ivLike" />
+               app:layout_constraintTop_toTopOf="@id/ivLike"
+               app:layout_constraintRight_toLeftOf="@id/ivLike"
+               app:layout_constraintBottom_toBottomOf="@id/ivLike"/>
 
        </androidx.constraintlayout.widget.ConstraintLayout>
 

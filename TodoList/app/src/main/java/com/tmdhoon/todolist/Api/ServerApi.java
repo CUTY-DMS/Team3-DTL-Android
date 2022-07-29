@@ -23,52 +23,52 @@ import retrofit2.http.Path;
 
 public interface ServerApi {
 
-    @POST("users/signin")                                                                           // 로그인
+    @POST("users/signin") // 로그인
     Call<SignInResponse> signIn(
             @Body SignInRequest signInRequest
     );
 
-    @POST("users/signup")                                                                           // 회원가입
+    @POST("users/signup") // 회원가입
     Call<SignUpResponse> signUp(
             @Body SignUpRequest signUpRequest
     );
 
-    @POST("post")                                                                                   // 게시글 작성
+    @POST("post") // 글쓰기
     Call<Void> post(
             @Header("AccessToken") String token,
             @Body PostRequest postRequest
     );
 
-    @GET("post/main")                                                                               // 전체 게시글 조회
+    @GET("post/main") // 전체 글 조회
     Call<List<MainResponse>> main(
             @Header("AccessToken") String token
     );
 
-    @GET("users/my")                                                                                // 내 정보 조회
+    @GET("users/my") // 내 정보 조회
     Call<MyResponse> my(
             @Header("AccessToken") String token
     );
 
-    @GET("post/main/like/{todoId}")                                                                 // 게시글 좋아요
+    @GET("post/main/like/{todoId}") // 글 좋아요
     Call<Void> like(
             @Header("AccessToken") String token,
             @Path("todoId") long todoId
     );
 
-    @PUT("users/my/{todoId}")                                                                       // 게시글 수정
+    @PUT("users/my/{todoId}") // 글 수정
     Call<Void> edit(
             @Header("AccessToken") String token,
             @Path("todoId") long todoId,
             @Body EditRequest editRequest
     );
 
-    @DELETE("users/my/{todoId}")                                                                    // 게시글 삭제
+    @DELETE("users/my/{todoId}") // 글 삭제
     Call<Void> delete(
             @Header("AccessToken") String token,
             @Path("todoId") long todoId
     );
 
-    @PATCH("users/my/{todoId}")                                                                     // 게시글 성공 여부 변경
+    @PATCH("users/my/{todoId}") // 성공 여부
     Call<Void> success(
             @Header("AccessToken") String token,
             @Path("todoId") long todoId

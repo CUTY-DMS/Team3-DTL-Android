@@ -20,15 +20,15 @@ public class DetailActivity extends AppCompatActivity {
 
         Bundle extras =getIntent().getExtras();
 
-        String Title = extras.getString("title");                                               // 제목을 받아옴
-        String Content = extras.getString("content");                                           // 내용을 받아옴
-        String Member_id = extras.getString("member_id");                                       // 유저 아이디를 받아옴
-        String Created_at = extras.getString("created_at");                                     // 만든 시간을 받아옴
+        String title = extras.getString("title");
+        String content = extras.getString("content");
+        String member_id = extras.getString("member_id");
+        String created_at = extras.getString("created_at");
 
-        binding.tvTitle.setText(Title);                                                             // 텍스트를 띄움
-        binding.tvContent.setText(Content);
-        binding.tvMemeberId.setText(Member_id);
-        binding.tvCreatedAt.setText(Created_at);
+        binding.tvTitle.setText(title);
+        binding.tvContent.setText(content);
+        binding.tvMemeberId.setText(member_id);
+        binding.tvCreatedAt.setText(created_at);
 
 
     }

@@ -27,34 +27,37 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class HomeFragment extends Fragment{
+public class HomeFragment extends Fragment {
 
-    private RecyclerView recyclerView;                                                              // 리사이클러뷰
-    private LinearLayoutManager linearLayoutManager;                                                // 리니어 레이아웃 매니저
-    private TodoAdapter todoAdapter;                                                                // 리사이클러뷰 어댑터
-    List<MainResponse> mainResponseList;                                                            // todolist
+    private RecyclerView recyclerView;
+    private LinearLayoutManager linearLayoutManager;
+    private TodoAdapter todoAdapter;
+
+    List<MainResponse> mainResponseList;
 
     public View onCreateView(LayoutInflater inflater, ViewGroup containter,
-                             Bundle savedInstanceState){
+                             Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_home, containter, false);
 
+        mainResponseList = new ArrayList<>();
 
-        mainResponseList = new ArrayList<>();                                                       // todoresponse를 arraylist에 담음
-        recyclerView = view.findViewById(R.id.recyclerview);                                        // 리사이클러뷰 연결
-        linearLayoutManager = new LinearLayoutManager(getActivity());                               // 리니어레이아웃 매니저 지정
-        recyclerView.setLayoutManager(linearLayoutManager);                                         // 레이아웃매니저 설정
+        recyclerView = view.findViewById(R.id.recyclerview);
 
-        todoAdapter = new TodoAdapter(mainResponseList);                                            // 어댑터에 서버로부터 받은 리스트를 담음
+        linearLayoutManager = new LinearLayoutManager(getActivity());
 
-        recyclerView.setAdapter(todoAdapter);                                                       // 리사이클러뷰 어댑터 설정
+        recyclerView.setLayoutManager(linearLayoutManager);
 
-        ServerApi serverApi = ApiProvider.getInstance().create(ServerApi.class);                    // 레트로핏 생성
+        todoAdapter = new TodoAdapter(mainResponseList);
 
-        serverApi.main(SignInActivity.AccessToken).enqueue(new Callback<List<MainResponse>>() {     // 서버로부터 리스트 받음
+        recyclerView.setAdapter(todoAdapter);
+
+        ServerApi serverApi = ApiProvider.getInstance().create(ServerApi.class);
+
+        serverApi.main(SignInActivity.AccessToken).enqueue(new Callback<List<MainResponse>>() {
             @Override
             public void onResponse(Call<List<MainResponse>> call, Response<List<MainResponse>> response) {
-                mainResponseList.addAll(response.body());                                           // 서버로부터 받은 값을 리스트에 모두 추가
-                todoAdapter.notifyDataSetChanged();                                                 // 리사이클러뷰 새로고침3
+                mainResponseList.addAll(response.body());
+                todoAdapter.notifyDataSetChanged();
             }
 
             @Override

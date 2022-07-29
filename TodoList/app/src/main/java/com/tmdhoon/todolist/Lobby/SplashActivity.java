@@ -14,20 +14,20 @@ public class SplashActivity extends AppCompatActivity {
     private ActivitySplashBinding binding;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState){
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         binding = ActivitySplashBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
-        Handler handler = new Handler();                                                            // 쓰레드간의 통신을 도와줌
-        handler.postDelayed(new Runnable() {                                                        // 약간의 시간을 두고 실행시킴
+        Handler handler = new Handler();
+        handler.postDelayed(new Runnable() {
             @Override
             public void run() {
-                Intent intent = new Intent(getApplicationContext(), SignInActivity.class);          // 로그인 화면으로 넘어감
+                Intent intent = new Intent(getApplicationContext(), SignInActivity.class);
                 startActivity(intent);
                 finish();
             }
-        }, 2000);                                                                           // 2초 후
+        }, 2000);
     }
 }

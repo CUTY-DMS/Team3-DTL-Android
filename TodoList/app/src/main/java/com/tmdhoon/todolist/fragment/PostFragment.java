@@ -30,8 +30,10 @@ public class PostFragment extends Fragment {
 
     private EditText etTitle;
     private EditText etContent;
+
     private Button btPost;
     private Button btDelete;
+
     private TextView tvtitleCount;
     private TextView tvcontentCount;
 
@@ -46,58 +48,62 @@ public class PostFragment extends Fragment {
         tvtitleCount = rootView.findViewById(R.id.tvtitleCount);
         tvcontentCount = rootView.findViewById(R.id.tvcontentCount);
 
-        etTitle.addTextChangedListener(new TextWatcher() {                                          // 제목 입력란에 변화가 있을때
+        etTitle.addTextChangedListener(new TextWatcher() {
             @Override
-            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {       // 입력 전
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
 
             }
 
             @Override
-            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {           // 입력 중
-                tvtitleCount.setText(etTitle.getText().length() + "/20");                           // 제목의 길이를 얻어와서 텍스트뷰에 표시
-                if (etTitle.getText().length() == 20)
-                    tvtitleCount.setTextColor(Color.RED);                                           // 제목이 20자인 경우 빨간색
-                else
-                    tvtitleCount.setTextColor(Color.BLACK);                                         // 그렇지 않은 경우 검정색
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                int length = etTitle.length();
+                tvtitleCount.setText(length + "/20");
+                if (length == 20) {
+                    tvtitleCount.setTextColor(Color.RED);
+                } else {
+                    tvtitleCount.setTextColor(Color.BLACK);
+                }
             }
 
             @Override
-            public void afterTextChanged(Editable editable) {                                       // 입력 후
-
-            }
-        });
-
-        etContent.addTextChangedListener(new TextWatcher() {                                        // 내용 입력란에 변화가 있을때
-            @Override
-            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {       // 입력 전
-
-            }
-
-            @Override
-            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {           // 입력 중
-                tvcontentCount.setText(etContent.getText().length() + "/100");                      // 내용의 길이를 얻어와서 텍스트뷰에 표시
-                if (etContent.getText().length() == 100)
-                    tvcontentCount.setTextColor(Color.RED);      // 내용이 100자인 경우 빨간색
-                else
-                    tvcontentCount.setTextColor(Color.BLACK);                                       // 그렇지 않은 경우 검정색
-            }
-
-            @Override
-            public void afterTextChanged(Editable editable) {                                       // 입력 후
+            public void afterTextChanged(Editable editable) {
 
             }
         });
 
-        btPost.setOnClickListener(new View.OnClickListener() {                                      // 게시 버튼을 눌렀을때
+        etContent.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                int length = etContent.length();
+                tvcontentCount.setText(length + "/100");
+                if (length == 100) {
+                    tvcontentCount.setTextColor(Color.RED);
+                } else {
+                    tvcontentCount.setTextColor(Color.BLACK);
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+
+            }
+        });
+
+        btPost.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                postCheck();                                                                        // postCheck 메서드 호출
+                postCheck();
             }
         });
 
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
 
-        btDelete.setOnClickListener(new View.OnClickListener() {                                    // 삭제 버튼을 눌렀을때
+        btDelete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 builder.setTitle("초기화");
@@ -128,33 +134,33 @@ public class PostFragment extends Fragment {
     }
 
     public void postCheck() {
-        String title = etTitle.getText().toString();                                                // 제목 얻어옴
-        String content = etContent.getText().toString();                                            // 내용 얻어옴
+        int titleLength = etTitle.getText().length();
+        int contentLength = etContent.getText().length();
 
-        if (title.length() == 0) {                                                                  // 제목 길이가 0인 경우
-            Toast.makeText(getContext(), "제목을 입력해주세요", Toast.LENGTH_SHORT).show();        // 메시지
+        if (titleLength == 0) {
+            Toast.makeText(getContext(), "제목을 입력해주세요", Toast.LENGTH_SHORT).show();
         }
-        if (content.length() == 0) {                                                                // 내용 길이가 0인 경우
-            Toast.makeText(getContext(), "내용을 작성해주세요", Toast.LENGTH_SHORT).show();        // 메시지
+        if (contentLength == 0) {
+            Toast.makeText(getContext(), "내용을 작성해주세요", Toast.LENGTH_SHORT).show();
         } else
-            post();                                                                                 // 둘 다 아닌 경우 post 메서드 호출
+            post();
 
     }
 
     public void post() {
-        String title = etTitle.getText().toString();                                                 // 제목 얻어옴
-        String content = etContent.getText().toString();                                             // 내용 얻어옴
+        String title = etTitle.getText().toString();
+        String content = etContent.getText().toString();
 
-        PostRequest postRequest = new PostRequest(title, content);                                   // request 에 넣고
+        PostRequest postRequest = new PostRequest(title, content);
 
-        ServerApi serverApi = ApiProvider.getInstance().create(ServerApi.class);                     // 레트로핏 가져와서
+        ServerApi serverApi = ApiProvider.getInstance().create(ServerApi.class);
 
-        serverApi.post(SignInActivity.AccessToken, postRequest).enqueue(new Callback<Void>() {      // 서버와 통신
+        serverApi.post(SignInActivity.AccessToken, postRequest).enqueue(new Callback<Void>() {
             @Override
-            public void onResponse(Call<Void> call, Response<Void> response) {                      // 응답 성공
+            public void onResponse(Call<Void> call, Response<Void> response) {
                 if (response.isSuccessful()) {
-                    Toast.makeText(getContext(), "글이 정상적으로 등록되었습니다", Toast.LENGTH_SHORT).show(); // 메시지
-                    etTitle.setText("");                                                            // 입력란 초기화
+                    Toast.makeText(getContext(), "글이 정상적으로 등록되었습니다", Toast.LENGTH_SHORT).show();
+                    etTitle.setText("");
                     etContent.setText("");
 
                     etTitle.requestFocus();
@@ -162,11 +168,9 @@ public class PostFragment extends Fragment {
             }
 
             @Override
-            public void onFailure(Call<Void> call, Throwable t) {                                   // 응답 실패
-                Toast.makeText(getContext(), "글 등록에 실패하였습니다", Toast.LENGTH_SHORT).show(); // 메시지
+            public void onFailure(Call<Void> call, Throwable t) {
+                Toast.makeText(getContext(), "글 등록에 실패하였습니다", Toast.LENGTH_SHORT).show();
             }
         });
-
-
     }
 }

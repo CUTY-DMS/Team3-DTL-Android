@@ -13,10 +13,10 @@
         android:theme="@style/Theme.TodoList.Splash"
         android:usesCleartextTraffic="true">
         <activity
-            android:name=".MypageActivity"
+            android:name=".Lobby.MypageActivity"
             android:exported="false" />
         <activity
-            android:name=".Lobby.MyDetailActivity"
+            android:name=".Lobby.EditActivity"
             android:exported="false" />
         <activity
             android:name=".Lobby.DetailActivity"

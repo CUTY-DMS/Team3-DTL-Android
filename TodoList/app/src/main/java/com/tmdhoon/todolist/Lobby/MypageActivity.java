@@ -1,4 +1,4 @@
-package com.tmdhoon.todolist;
+package com.tmdhoon.todolist.Lobby;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;

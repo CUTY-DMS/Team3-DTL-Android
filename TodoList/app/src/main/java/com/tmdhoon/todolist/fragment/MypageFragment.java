@@ -11,16 +11,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.TextView;
-import android.widget.Toast;
 
 
 import com.tmdhoon.todolist.Api.ApiProvider;
 import com.tmdhoon.todolist.Api.ServerApi;
 import com.tmdhoon.todolist.Lobby.SignInActivity;
-import com.tmdhoon.todolist.MypageActivity;
+import com.tmdhoon.todolist.Lobby.MypageActivity;
 import com.tmdhoon.todolist.R;
 import com.tmdhoon.todolist.Adapter.MyTodoAdapter;
 import com.tmdhoon.todolist.Response.MyResponse;
@@ -35,23 +32,29 @@ import retrofit2.Response;
 
 public class MypageFragment extends Fragment {
 
-    private ArrayList<MyTodoResponse> todos;                                                        // arraylist 에 mytodoresponse 값 담음
-    private MyTodoAdapter myTodoAdapter;                                                            // mytodoadapter
+    private RecyclerView recyclerView;
+    private LinearLayoutManager linearLayoutManager;
+    private MyTodoAdapter myTodoAdapter;
 
     private ImageView ivmyPage;
+
+    ArrayList<MyTodoResponse> todos;
 
     public View onCreateView(LayoutInflater inflater, ViewGroup containter,
                              Bundle savedInstanceState) {
         ViewGroup rootView = (ViewGroup) inflater.inflate(R.layout.fragment_mypage, containter, false);
 
-        todos = new ArrayList<>();                                                                  // mytodoresponse 값을 arraylist
-        RecyclerView recyclerView = rootView.findViewById(R.id.myRecyclerView);                     // 리사이클러뷰 연결
-        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity());           // 리니어 레이아웃 매니저
-        recyclerView.setLayoutManager(linearLayoutManager);                                         // 리니어 레이아웃 매니저 set
+        todos = new ArrayList<>();
 
-        myTodoAdapter = new MyTodoAdapter(todos);                                                   // 어댑터에 arraylist 담고
+        recyclerView = rootView.findViewById(R.id.myRecyclerView);
 
-        recyclerView.setAdapter(myTodoAdapter);                                                     // 어댑터 설정
+        linearLayoutManager = new LinearLayoutManager(getActivity());
+
+        recyclerView.setLayoutManager(linearLayoutManager);
+
+        myTodoAdapter = new MyTodoAdapter(todos);
+
+        recyclerView.setAdapter(myTodoAdapter);
 
         ivmyPage = rootView.findViewById(R.id.ivmyPage);
 
@@ -63,15 +66,14 @@ public class MypageFragment extends Fragment {
             }
         });
 
-        ServerApi serverApi = ApiProvider.getInstance().create(ServerApi.class);                    // 레트로핏 가져와서
+        ServerApi serverApi = ApiProvider.getInstance().create(ServerApi.class);
 
-        serverApi.my(SignInActivity.AccessToken).enqueue(new Callback<MyResponse>() {               // 서버와 통신
-
+        serverApi.my(SignInActivity.AccessToken).enqueue(new Callback<MyResponse>() {
             @Override
-            public void onResponse(Call<MyResponse> call, Response<MyResponse> response) {          // 응답 성공
-                if (response.isSuccessful()) {                                                      // 응답 코드가 성공이 경우
-                    todos.addAll(response.body().getArrayList());                                   // 내가 작성한 투두 arraylist 에 추가
-                    myTodoAdapter.notifyDataSetChanged();                                           // 리사이클러뷰 새로고침
+            public void onResponse(Call<MyResponse> call, Response<MyResponse> response) {
+                if (response.isSuccessful()) {
+                    todos.addAll(response.body().getArrayList());
+                    myTodoAdapter.notifyDataSetChanged();
                 }
             }
 

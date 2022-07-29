@@ -35,10 +35,10 @@ public class TodoAdapter extends RecyclerView.Adapter<TodoAdapter.TodoViewHolder
     private List<MainResponse> list;
     private TodoAdapter todoAdapter;
 
-    private SharedPreferences preferences;
-    private SharedPreferences.Editor editor;
+    public static SharedPreferences preferences;
+    public static SharedPreferences.Editor editor;
 
-    private String id;
+    public static String id;
 
 
     public class TodoViewHolder extends RecyclerView.ViewHolder {
@@ -109,7 +109,8 @@ public class TodoAdapter extends RecyclerView.Adapter<TodoAdapter.TodoViewHolder
                 intent.putExtra("content", list.get(position).getContent());
                 intent.putExtra("member_id", list.get(position).getMember_id());
                 intent.putExtra("created_at", list.get(position).getCreated_at());
-
+                intent.putExtra("like_count", list.get(position).getLike_count());
+                intent.putExtra("Like", preferences.getInt("Like" + id + list.get(position).getId(), 0));
                 view.getContext().startActivity(intent);
             }
         });

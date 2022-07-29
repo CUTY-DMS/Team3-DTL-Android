@@ -57,4 +57,33 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintRight_toRightOf="parent"/>
 
+    <ImageView
+        android:id="@+id/ivdetailLike"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:layout_marginLeft="32dp"
+        android:layout_marginBottom="32dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"/>
+
+    <TextView
+        android:id="@+id/tvlikeCount"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="40sp"
+        android:textColor="@color/black"
+        android:fontFamily="@font/dohyeon"
+        android:layout_marginLeft="16dp"
+        app:layout_constraintLeft_toRightOf="@id/ivdetailLike"
+        app:layout_constraintBottom_toBottomOf="@id/ivdetailLike"/>
+
+    <ImageView
+        android:id="@+id/ivdetailSuccess"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:layout_marginRight="32dp"
+        android:layout_marginBottom="32dp"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"/>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

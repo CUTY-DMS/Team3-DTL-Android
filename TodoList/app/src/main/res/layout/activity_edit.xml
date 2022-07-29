@@ -29,8 +29,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="수정"
-            android:textSize="18sp"
+            android:textSize="22sp"
             android:textColor="@color/black"
+            android:fontFamily="@font/dohyeon"
             android:layout_gravity="right"
             android:layout_marginTop="20dp"
             android:layout_marginRight="32dp"/>
@@ -40,8 +41,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="초기화"
-            android:textSize="18sp"
+            android:textSize="22sp"
             android:textColor="#BA0505"
+            android:fontFamily="@font/dohyeon"
             android:layout_gravity="right"
             android:layout_marginTop="54dp"
             android:layout_marginRight="32dp"/>

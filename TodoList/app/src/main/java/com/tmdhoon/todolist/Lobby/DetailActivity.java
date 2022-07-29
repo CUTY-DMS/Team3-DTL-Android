@@ -19,13 +19,14 @@ public class DetailActivity extends AppCompatActivity {
         binding = ActivityDetailBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
-        Bundle extras =getIntent().getExtras();
+        Bundle extras = getIntent().getExtras();
 
         String title = extras.getString("title");
         String content = extras.getString("content");
         String member_id = extras.getString("member_id");
         String created_at = extras.getString("created_at");
         int like_count = extras.getInt("like_count");
+        boolean success = extras.getBoolean("success");
 
         binding.tvTitle.setText(title);
         binding.tvContent.setText(content);
@@ -33,9 +34,15 @@ public class DetailActivity extends AppCompatActivity {
         binding.tvCreatedAt.setText(created_at);
         binding.tvlikeCount.setText(String.valueOf(like_count));
 
-        if(extras.getInt("Like") == 1){
+        if (success == true) {
+            binding.ivdetailSuccess.setImageResource(R.drawable.correct);
+        } else {
+            binding.ivdetailSuccess.setImageResource(R.drawable.incorrect);
+        }
+
+        if (extras.getInt("like") == 1) {
             binding.ivdetailLike.setImageResource(R.drawable.red);
-        }else if(extras.getInt("Like") == 0){
+        } else {
             binding.ivdetailLike.setImageResource(R.drawable.white);
         }
 

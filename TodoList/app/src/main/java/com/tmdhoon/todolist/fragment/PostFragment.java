@@ -31,8 +31,8 @@ public class PostFragment extends Fragment {
     private EditText etTitle;
     private EditText etContent;
 
-    private Button btPost;
-    private Button btDelete;
+    private TextView btPost;
+    private TextView btDelete;
 
     private TextView tvtitleCount;
     private TextView tvcontentCount;
@@ -43,8 +43,8 @@ public class PostFragment extends Fragment {
 
         etTitle = rootView.findViewById(R.id.etTitle);
         etContent = rootView.findViewById(R.id.etContent);
-        btPost = rootView.findViewById(R.id.btPost);
-        btDelete = rootView.findViewById(R.id.btDelete);
+        btPost = rootView.findViewById(R.id.tvPost);
+        btDelete = rootView.findViewById(R.id.tvDelete);
         tvtitleCount = rootView.findViewById(R.id.tvtitleCount);
         tvcontentCount = rootView.findViewById(R.id.tvcontentCount);
 

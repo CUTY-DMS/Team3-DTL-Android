@@ -93,7 +93,7 @@ public class EditActivity extends AppCompatActivity {
             }
         });
 
-        binding.bteditPost.setOnClickListener(new View.OnClickListener() {
+        binding.tveditPost.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 editCheck();
@@ -102,7 +102,7 @@ public class EditActivity extends AppCompatActivity {
 
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
 
-        binding.bteditDelete.setOnClickListener(new View.OnClickListener() {
+        binding.tveditDelete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 builder.setTitle("초기화");

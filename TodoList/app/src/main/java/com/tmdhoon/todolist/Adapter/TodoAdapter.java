@@ -33,7 +33,6 @@ import retrofit2.Response;
 public class TodoAdapter extends RecyclerView.Adapter<TodoAdapter.TodoViewHolder> {
 
     private List<MainResponse> list;
-    private TodoAdapter todoAdapter;
 
     public static SharedPreferences preferences;
     public static SharedPreferences.Editor editor;
@@ -81,8 +80,6 @@ public class TodoAdapter extends RecyclerView.Adapter<TodoAdapter.TodoViewHolder
 
     @Override
     public void onBindViewHolder(@NonNull TodoAdapter.TodoViewHolder holder, int position) {
-
-
         holder.title.setText(list.get(position).getTitle());
         holder.created_at.setText(list.get(position).getCreated_at());
         holder.member_id.setText(list.get(position).getMember_id());
@@ -90,16 +87,19 @@ public class TodoAdapter extends RecyclerView.Adapter<TodoAdapter.TodoViewHolder
 
         if (preferences.getInt("Like" + id + list.get(position).getId(), 0) == 1) {
             holder.like.setImageResource(R.drawable.red);
-        } else if (preferences.getInt("Like" + id + list.get(position).getId(), 0) == 0) {
+        } else {
             holder.like.setImageResource(R.drawable.white);
         }
 
-        if (list.get(position).getTodo_success() == true) holder.todo_success.setImageResource(R.drawable.correct);
-        else holder.todo_success.setImageResource(R.drawable.incorrect);
+        if (list.get(position).getTodo_success() == true){
+            holder.todo_success.setImageResource(R.drawable.correct);
+        } else{
+            holder.todo_success.setImageResource(R.drawable.incorrect);
+        }
+
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
                 Intent intent = new Intent(view.getContext(), DetailActivity.class);
 
                 intent.putExtra("title", list.get(position).getTitle());
@@ -110,6 +110,7 @@ public class TodoAdapter extends RecyclerView.Adapter<TodoAdapter.TodoViewHolder
                 intent.putExtra("success", list.get(position).getTodo_success());
                 intent.putExtra("id", list.get(position).getId());
                 intent.putExtra("like", preferences.getInt("Like" + id + list.get(position).getId(), 0));
+
                 view.getContext().startActivity(intent);
             }
         });

@@ -6,12 +6,14 @@ import android.os.Bundle;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import android.widget.ImageView;
+import android.widget.Toast;
 
 
 import com.tmdhoon.todolist.Api.ApiProvider;
@@ -20,11 +22,13 @@ import com.tmdhoon.todolist.Lobby.SignInActivity;
 import com.tmdhoon.todolist.Lobby.MypageActivity;
 import com.tmdhoon.todolist.R;
 import com.tmdhoon.todolist.Adapter.MyTodoAdapter;
+import com.tmdhoon.todolist.Response.MainResponse;
 import com.tmdhoon.todolist.Response.MyResponse;
 import com.tmdhoon.todolist.Response.MyTodoResponse;
 
 
 import java.util.ArrayList;
+import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -35,16 +39,17 @@ public class MypageFragment extends Fragment {
     private RecyclerView recyclerView;
     private LinearLayoutManager linearLayoutManager;
     private MyTodoAdapter myTodoAdapter;
+    private SwipeRefreshLayout refreshLayout;
 
     private ImageView ivmyPage;
 
-    ArrayList<MyTodoResponse> todos;
+    ArrayList<MyTodoResponse> list;
 
     public View onCreateView(LayoutInflater inflater, ViewGroup containter,
                              Bundle savedInstanceState) {
         ViewGroup rootView = (ViewGroup) inflater.inflate(R.layout.fragment_mypage, containter, false);
 
-        todos = new ArrayList<>();
+        list = new ArrayList<>();
 
         recyclerView = rootView.findViewById(R.id.myRecyclerView);
 
@@ -52,7 +57,7 @@ public class MypageFragment extends Fragment {
 
         recyclerView.setLayoutManager(linearLayoutManager);
 
-        myTodoAdapter = new MyTodoAdapter(todos);
+        myTodoAdapter = new MyTodoAdapter(list);
 
         recyclerView.setAdapter(myTodoAdapter);
 
@@ -72,7 +77,7 @@ public class MypageFragment extends Fragment {
             @Override
             public void onResponse(Call<MyResponse> call, Response<MyResponse> response) {
                 if (response.isSuccessful()) {
-                    todos.addAll(response.body().getArrayList());
+                    list.addAll(response.body().getArrayList());
                     myTodoAdapter.notifyDataSetChanged();
                 }
             }
@@ -80,6 +85,30 @@ public class MypageFragment extends Fragment {
             @Override
             public void onFailure(Call<MyResponse> call, Throwable t) {
 
+            }
+        });
+
+        refreshLayout = rootView.findViewById(R.id.myrefresh);
+
+        refreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                serverApi.my(SignInActivity.AccessToken).enqueue(new Callback<MyResponse>() {
+                    @Override
+                    public void onResponse(Call<MyResponse> call, Response<MyResponse> response) {
+                        if(response.isSuccessful()){
+                            list.clear();
+                            list.addAll(response.body().getArrayList());
+                            myTodoAdapter.notifyDataSetChanged();
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Call<MyResponse> call, Throwable t) {
+
+                    }
+                });
+                refreshLayout.setRefreshing(false);
             }
         });
 

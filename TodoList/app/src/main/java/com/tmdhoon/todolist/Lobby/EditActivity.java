@@ -35,11 +35,11 @@ public class EditActivity extends AppCompatActivity {
         Bundle extras = getIntent().getExtras();
 
         id = extras.getLong("id");
-        String Title = extras.getString("title");
-        String Content = extras.getString("content");
+        String title = extras.getString("title");
+        String content = extras.getString("content");
 
-        binding.eteditTitle.setText(Title);
-        binding.eteditContent.setText(Content);
+        binding.eteditTitle.setText(title);
+        binding.eteditContent.setText(content);
 
         int titleLength = binding.eteditTitle.getText().length();
         int contentLength = binding.eteditContent.getText().length();
@@ -114,6 +114,8 @@ public class EditActivity extends AppCompatActivity {
                         binding.eteditTitle.setText("");
                         binding.eteditContent.setText("");
 
+                        binding.eteditTitle.requestFocus();
+
                         Toast.makeText(EditActivity.this, "초기화되었습니다!", Toast.LENGTH_SHORT).show();
                     }
                 });
@@ -133,9 +135,11 @@ public class EditActivity extends AppCompatActivity {
     public void editCheck() {
         int titleLength = binding.eteditTitle.length();
         int contentLength = binding.eteditContent.length();
-        if (titleLength == 0) {
+        if (titleLength == 0 && contentLength ==0) {
             Toast.makeText(EditActivity.this, "제목을 입력해주세요", Toast.LENGTH_SHORT).show();
-        } else if (contentLength == 0) {
+        } else if (titleLength == 0 && contentLength != 0) {
+            Toast.makeText(EditActivity.this, "제목을 입력해주세요", Toast.LENGTH_SHORT).show();
+        } else if (titleLength != 0 && contentLength == 0) {
             Toast.makeText(EditActivity.this, "내용을 입력해주세요", Toast.LENGTH_SHORT).show();
         } else {
             edit();

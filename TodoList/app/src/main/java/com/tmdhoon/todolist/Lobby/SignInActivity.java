@@ -88,10 +88,13 @@ public class SignInActivity extends AppCompatActivity {
         int idLength = binding.etId.length();
         int pwLength = binding.etPw.length();
 
-        if(idLength == 0){
+        if(idLength == 0 && pwLength == 0){
             Toast.makeText(SignInActivity.this, "아이디를 입력해주세요", Toast.LENGTH_SHORT).show();
         }
-        else if(pwLength == 0){
+        else if(idLength == 0 &&  pwLength != 0){
+            Toast.makeText(SignInActivity.this, "아이디를 입력해주세요", Toast.LENGTH_SHORT).show();
+        }
+        else if(idLength != 0 &&  pwLength == 0){
             Toast.makeText(SignInActivity.this, "비밀번호를 입력해주세요", Toast.LENGTH_SHORT).show();
         }
         else signIn();
@@ -159,12 +162,6 @@ public class SignInActivity extends AppCompatActivity {
                     Toast.makeText(SignInActivity.this, "로그인에 성공했습니다!", Toast.LENGTH_SHORT).show();
 
                     AccessToken = response.body().getToken();
-
-                    if (binding.cbautoLogin.isChecked()) {
-                        editor.putInt("Check", 1).commit();
-                        editor.putString("Id", userId).commit();
-                        editor.putString("Pw", userPw).commit();
-                    }
 
                     Intent intent = new Intent(getApplicationContext(), MainActivity.class);
                     startActivity(intent);

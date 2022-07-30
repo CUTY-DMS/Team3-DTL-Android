@@ -115,6 +115,8 @@ public class PostFragment extends Fragment {
                         etTitle.setText("");
                         etContent.setText("");
 
+                        etTitle.requestFocus();
+
                         Toast.makeText(getActivity(), "초기화되었습니다!", Toast.LENGTH_SHORT).show();
                     }
                 });
@@ -137,12 +139,13 @@ public class PostFragment extends Fragment {
         int titleLength = etTitle.getText().length();
         int contentLength = etContent.getText().length();
 
-        if (titleLength == 0) {
+        if (titleLength == 0 && contentLength == 0) {
             Toast.makeText(getContext(), "제목을 입력해주세요", Toast.LENGTH_SHORT).show();
-        }
-        if (contentLength == 0) {
+        } else if (titleLength == 0 && contentLength != 0) {
+            Toast.makeText(getContext(), "제목을 입력해주세요", Toast.LENGTH_SHORT).show();
+        } else if (titleLength != 0 && contentLength == 0) {
             Toast.makeText(getContext(), "내용을 작성해주세요", Toast.LENGTH_SHORT).show();
-        } else
+        }else
             post();
 
     }

@@ -38,7 +38,7 @@ public class MyTodoAdapter extends RecyclerView.Adapter<MyTodoAdapter.MyTodoView
 
     public class MyTodoViewHolder extends RecyclerView.ViewHolder {
 
-//        public TextView myContent;
+        public TextView myContent;
         public TextView myTitle;
         public TextView myCreated_at;
         public ImageView mySuccess;
@@ -49,7 +49,7 @@ public class MyTodoAdapter extends RecyclerView.Adapter<MyTodoAdapter.MyTodoView
         public MyTodoViewHolder(@NonNull View itemView) {
             super(itemView);
 
-//            myContent = itemView.findViewById(R.id.tvmyContent);
+            myContent = itemView.findViewById(R.id.tvmyContent);
             myTitle = itemView.findViewById(R.id.tvmyTitle);
             myCreated_at = itemView.findViewById(R.id.tvmyCreated_at);
             mySuccess = itemView.findViewById(R.id.ivmySuccess);
@@ -71,6 +71,7 @@ public class MyTodoAdapter extends RecyclerView.Adapter<MyTodoAdapter.MyTodoView
     @Override
     public void onBindViewHolder(@NonNull MyTodoAdapter.MyTodoViewHolder holder, int position) {
         holder.myTitle.setText(list.get(position).getTitle());
+        holder.myContent.setText(list.get(position).getContent());
         holder.myCreated_at.setText(list.get(position).getCreated_at());
         if (list.get(position).getSuccess() == true) holder.mySuccess.setImageResource(R.drawable.correct);
         else holder.mySuccess.setImageResource(R.drawable.incorrect);
@@ -82,6 +83,7 @@ public class MyTodoAdapter extends RecyclerView.Adapter<MyTodoAdapter.MyTodoView
                 intent.putExtra("id", list.get(position).getId());
                 intent.putExtra("title", list.get(position).getTitle());
                 intent.putExtra("content", list.get(position).getContent());
+
                 view.getContext().startActivity(intent);
             }
         });

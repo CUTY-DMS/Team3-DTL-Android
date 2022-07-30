@@ -11,8 +11,6 @@ import android.widget.Toast;
 
 import com.tmdhoon.todolist.Api.ApiProvider;
 import com.tmdhoon.todolist.Api.ServerApi;
-import com.tmdhoon.todolist.DeveloperActivity;
-import com.tmdhoon.todolist.Lobby.SignInActivity;
 import com.tmdhoon.todolist.Response.MyResponse;
 import com.tmdhoon.todolist.databinding.ActivityMypageBinding;
 
@@ -31,14 +29,6 @@ public class MypageActivity extends AppCompatActivity {
         binding = ActivityMypageBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
-        binding.cbDevelopers.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(getApplicationContext(), DeveloperActivity.class);
-                startActivity(intent);
-            }
-        });
-
         ServerApi serverApi = ApiProvider.getInstance().create(ServerApi.class);
 
         serverApi.my(SignInActivity.AccessToken).enqueue(new Callback<MyResponse>() {
@@ -54,6 +44,14 @@ public class MypageActivity extends AppCompatActivity {
             @Override
             public void onFailure(Call<MyResponse> call, Throwable t) {
 
+            }
+        });
+
+        binding.cbDevelopers.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getApplicationContext(), DeveloperActivity.class);
+                startActivity(intent);
             }
         });
 

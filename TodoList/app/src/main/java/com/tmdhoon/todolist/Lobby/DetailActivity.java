@@ -20,7 +20,6 @@ import retrofit2.Response;
 public class DetailActivity extends AppCompatActivity {
 
     private ActivityDetailBinding binding;
-    private TodoAdapter todoAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,8 +43,6 @@ public class DetailActivity extends AppCompatActivity {
         binding.tvMemeberId.setText(member_id);
         binding.tvCreatedAt.setText(created_at);
         binding.tvlikeCount.setText(String.valueOf(like_count));
-
-
 
         if(member_id.equals(SignInActivity.preferences.getString("Id", ""))){
             binding.ivdetailEdit.setImageResource(R.drawable.ic_baseline_edit_24);
@@ -89,7 +86,6 @@ public class DetailActivity extends AppCompatActivity {
                             binding.ivdetailLike.setImageResource(R.drawable.red);
                             TodoAdapter.editor.putInt("Like" + TodoAdapter.id + id, 1).commit();
                         }
-
                     }
 
                     @Override

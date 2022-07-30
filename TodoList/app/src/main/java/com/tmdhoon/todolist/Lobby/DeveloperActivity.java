@@ -1,8 +1,10 @@
-package com.tmdhoon.todolist;
+package com.tmdhoon.todolist.Lobby;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+
+import com.tmdhoon.todolist.R;
 
 public class DeveloperActivity extends AppCompatActivity {
 

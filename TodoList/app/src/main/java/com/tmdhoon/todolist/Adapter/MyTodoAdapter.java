@@ -52,7 +52,6 @@ public class MyTodoAdapter extends RecyclerView.Adapter<MyTodoAdapter.MyTodoView
             myTitle = itemView.findViewById(R.id.tvmyTitle);
             myCreated_at = itemView.findViewById(R.id.tvmyCreated_at);
             mySuccess = itemView.findViewById(R.id.ivmySuccess);
-            btSuccess = itemView.findViewById(R.id.btSuccess);
             edit = itemView.findViewById(R.id.ivedit);
             delete = itemView.findViewById(R.id.ivdelete);
         }

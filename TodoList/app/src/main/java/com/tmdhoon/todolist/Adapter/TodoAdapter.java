@@ -43,7 +43,6 @@ public class TodoAdapter extends RecyclerView.Adapter<TodoAdapter.TodoViewHolder
 
     public class TodoViewHolder extends RecyclerView.ViewHolder {
 
-        public TextView content;
         public TextView title;
         public TextView created_at;
         public TextView member_id;
@@ -53,7 +52,6 @@ public class TodoAdapter extends RecyclerView.Adapter<TodoAdapter.TodoViewHolder
 
         public TodoViewHolder(View view) {
             super(view);
-            content = view.findViewById(R.id.tvcontent);
             title = view.findViewById(R.id.tvtitle);
             created_at = view.findViewById(R.id.tvcreated_at);
             member_id = view.findViewById(R.id.tvmember_id);
@@ -85,7 +83,6 @@ public class TodoAdapter extends RecyclerView.Adapter<TodoAdapter.TodoViewHolder
     public void onBindViewHolder(@NonNull TodoAdapter.TodoViewHolder holder, int position) {
 
 
-        holder.content.setText(list.get(position).getContent());
         holder.title.setText(list.get(position).getTitle());
         holder.created_at.setText(list.get(position).getCreated_at());
         holder.member_id.setText(list.get(position).getMember_id());
@@ -111,6 +108,7 @@ public class TodoAdapter extends RecyclerView.Adapter<TodoAdapter.TodoViewHolder
                 intent.putExtra("created_at", list.get(position).getCreated_at());
                 intent.putExtra("like_count", list.get(position).getLike_count());
                 intent.putExtra("success", list.get(position).getTodo_success());
+                intent.putExtra("id", list.get(position).getId());
                 intent.putExtra("like", preferences.getInt("Like" + id + list.get(position).getId(), 0));
                 view.getContext().startActivity(intent);
             }

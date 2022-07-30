@@ -45,12 +45,17 @@ public class DetailActivity extends AppCompatActivity {
         binding.tvCreatedAt.setText(created_at);
         binding.tvlikeCount.setText(String.valueOf(like_count));
 
+
+
         if(member_id.equals(SignInActivity.preferences.getString("Id", ""))){
             binding.ivdetailEdit.setImageResource(R.drawable.ic_baseline_edit_24);
             binding.ivdetailEdit.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
                     Intent intent = new Intent(getApplicationContext(), EditActivity.class);
+                    intent.putExtra("id", id);
+                    intent.putExtra("title", title);
+                    intent.putExtra("content", content);
                     startActivity(intent);
                 }
             });

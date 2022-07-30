@@ -32,6 +32,7 @@ public class HomeFragment extends Fragment {
     private RecyclerView recyclerView;
     private LinearLayoutManager linearLayoutManager;
     private TodoAdapter todoAdapter;
+    private SwipeRefreshLayout swipeRefreshLayout;
 
     List<MainResponse> mainResponseList;
 
@@ -63,6 +64,29 @@ public class HomeFragment extends Fragment {
             @Override
             public void onFailure(Call<List<MainResponse>> call, Throwable t) {
                 Toast.makeText(getActivity(), "Error: " + t.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        swipeRefreshLayout = view.findViewById(R.id.refresh);
+
+        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                serverApi.main(SignInActivity.AccessToken).enqueue(new Callback<List<MainResponse>>() {
+                    @Override
+                    public void onResponse(Call<List<MainResponse>> call, Response<List<MainResponse>> response) {
+                        mainResponseList.clear();
+                        mainResponseList.addAll(response.body());
+                        todoAdapter.notifyDataSetChanged();
+                    }
+
+                    @Override
+                    public void onFailure(Call<List<MainResponse>> call, Throwable t) {
+                        Toast.makeText(getActivity(), "Error: " + t.getMessage(), Toast.LENGTH_SHORT).show();
+                    }
+                });
+
+                swipeRefreshLayout.setRefreshing(false);
             }
         });
 

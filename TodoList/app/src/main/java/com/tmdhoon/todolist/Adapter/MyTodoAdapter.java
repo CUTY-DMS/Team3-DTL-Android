@@ -16,6 +16,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.tmdhoon.todolist.Api.ApiProvider;
 import com.tmdhoon.todolist.Api.ServerApi;
+import com.tmdhoon.todolist.Lobby.DetailActivity;
 import com.tmdhoon.todolist.Lobby.SignInActivity;
 import com.tmdhoon.todolist.Lobby.EditActivity;
 import com.tmdhoon.todolist.R;
@@ -37,7 +38,7 @@ public class MyTodoAdapter extends RecyclerView.Adapter<MyTodoAdapter.MyTodoView
 
     public class MyTodoViewHolder extends RecyclerView.ViewHolder {
 
-        public TextView myContent;
+//        public TextView myContent;
         public TextView myTitle;
         public TextView myCreated_at;
         public ImageView mySuccess;
@@ -48,7 +49,7 @@ public class MyTodoAdapter extends RecyclerView.Adapter<MyTodoAdapter.MyTodoView
         public MyTodoViewHolder(@NonNull View itemView) {
             super(itemView);
 
-            myContent = itemView.findViewById(R.id.tvmyContent);
+//            myContent = itemView.findViewById(R.id.tvmyContent);
             myTitle = itemView.findViewById(R.id.tvmyTitle);
             myCreated_at = itemView.findViewById(R.id.tvmyCreated_at);
             mySuccess = itemView.findViewById(R.id.ivmySuccess);
@@ -69,7 +70,6 @@ public class MyTodoAdapter extends RecyclerView.Adapter<MyTodoAdapter.MyTodoView
 
     @Override
     public void onBindViewHolder(@NonNull MyTodoAdapter.MyTodoViewHolder holder, int position) {
-        holder.myContent.setText(list.get(position).getContent());
         holder.myTitle.setText(list.get(position).getTitle());
         holder.myCreated_at.setText(list.get(position).getCreated_at());
         if (list.get(position).getSuccess() == true) holder.mySuccess.setImageResource(R.drawable.correct);

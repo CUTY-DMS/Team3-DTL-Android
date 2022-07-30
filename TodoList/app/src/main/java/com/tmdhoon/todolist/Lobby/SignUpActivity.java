@@ -45,6 +45,8 @@ public class SignUpActivity extends AppCompatActivity {
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
                 int length = binding.etRegisterName.getText().length();
 
+                binding.tvnameCount.setText(length + "/10");
+
                 if(length == 10) binding.tvnameCount.setTextColor(Color.RED);
                 else binding.tvnameCount.setTextColor(Color.BLACK);
 
